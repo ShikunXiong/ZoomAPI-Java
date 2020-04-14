@@ -6,20 +6,15 @@ import java.io.IOException;
 import java.util.Base64;
 
 public class HttpUtils {
-    OAuthClient oAuthClient;
     public static final String BASE_URL = "https://api.zoom.us/v2";
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
-    public HttpUtils(OAuthClient oAuthClient){
-        this.oAuthClient = oAuthClient;
-    }
     public HttpUtils(){}
-    public String get_request(String url) throws IOException {
+    public String get_request(String url, String token) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        //String token = "Bearer " + this.oAuthClient.getToken();
-        String token = "Bearer " + this.oAuthClient.getToken();
+        String valid_token = "Bearer " + token;
         Request request = new Request.Builder()
-                .addHeader("authorization", token)
+                .addHeader("authorization", valid_token)
                 .addHeader("Content-type", "application/json")
                 .url(BASE_URL + url)
                 .build();
