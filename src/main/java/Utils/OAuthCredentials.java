@@ -12,7 +12,7 @@ public class OAuthCredentials {
     public static final int PORT = 4000;
 
     /** Domain name in the "Callback URL". */
-    public static final String DOMAIN = "https://zoom.us";
+    public static final String DOMAIN = "http://ngrok.g7go.com";
 
     public static void errorIfNotSpecified() {
         if (API_KEY.startsWith("Enter ") || API_SECRET.startsWith("Enter ")) {

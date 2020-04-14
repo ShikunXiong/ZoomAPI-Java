@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="ngrok-java-master:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9af5b03-d395-4b61-99bd-d31dd5e27332" name="Default Changelist" comment="" />
+    <list default="true" id="f9af5b03-d395-4b61-99bd-d31dd5e27332" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_json.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_json1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Bots/botm2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Bots/botm2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Bots/test2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Bots/test2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utils/OAuthCredentials.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/OAuthCredentials.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -14,7 +43,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1aFFxTYNhmkdnMPMwwYabd4g4LZ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -26,21 +59,27 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindowDebug.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tmp/OAuth2.0_clientCredentials" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.15" />
+    <property name="last_opened_file_path" value="E:/Jars/ngrok-core.jar!/" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15234375" />
     <property name="project.structure.side.proportion" value="0.39655173" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.test">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn install" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.test2">
     <configuration name="OAuthClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Utils.OAuthClient" />
       <module name="ZoomAPI" />
@@ -55,6 +94,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="bottest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Bots.bottest" />
+      <module name="ZoomAPI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Bots.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Bots.test" />
       <module name="ZoomAPI" />
@@ -62,10 +114,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="test2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Bots.test2" />
+      <module name="ZoomAPI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Bots.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.test" />
+        <item itemvalue="Application.test2" />
+        <item itemvalue="Application.bottest" />
         <item itemvalue="Application.botm2" />
+        <item itemvalue="Application.test" />
         <item itemvalue="Application.OAuthClient" />
       </list>
     </recent_temporary>
@@ -97,6 +164,7 @@
       <workItem from="1586575090781" duration="299000" />
       <workItem from="1586673673256" duration="5027000" />
       <workItem from="1586743701344" duration="4867000" />
+      <workItem from="1586831816547" duration="15708000" />
     </task>
     <servers />
   </component>
@@ -108,58 +176,66 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="517" y="250" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1536.824@0.0.1536.824" timestamp="1586400586327" />
+    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser" timestamp="1586849682973">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1586849682973" />
     <state x="499" y="160" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586389718889">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="160" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1586389718889" />
-    <state x="501" y="155" key="FileChooserDialogImpl" timestamp="1586744667141">
+    <state x="501" y="155" key="FileChooserDialogImpl" timestamp="1586844755280">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="501" y="155" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1586744667141" />
-    <state width="1492" height="472" key="GridCell.Tab.0.bottom" timestamp="1586748793587">
+    <state x="501" y="155" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1586844755280" />
+    <state width="1492" height="329" key="GridCell.Tab.0.bottom" timestamp="1586853243348">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1492" height="472" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586748793587" />
-    <state width="1492" height="472" key="GridCell.Tab.0.center" timestamp="1586748793587">
+    <state width="1492" height="329" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586853243348" />
+    <state width="1492" height="329" key="GridCell.Tab.0.center" timestamp="1586853243348">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1492" height="472" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586748793587" />
-    <state width="1492" height="472" key="GridCell.Tab.0.left" timestamp="1586748793587">
+    <state width="1492" height="329" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586853243348" />
+    <state width="1492" height="329" key="GridCell.Tab.0.left" timestamp="1586853243348">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1492" height="472" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586748793587" />
-    <state width="1492" height="472" key="GridCell.Tab.0.right" timestamp="1586748793587">
+    <state width="1492" height="329" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586853243348" />
+    <state width="1492" height="329" key="GridCell.Tab.0.right" timestamp="1586853243348">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1492" height="472" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586748793587" />
-    <state width="1492" height="426" key="GridCell.Tab.1.bottom" timestamp="1586748793571">
+    <state width="1492" height="329" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586853243348" />
+    <state width="1492" height="329" key="GridCell.Tab.1.bottom" timestamp="1586853243349">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1492" height="426" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586748793571" />
-    <state width="1492" height="426" key="GridCell.Tab.1.center" timestamp="1586748793571">
+    <state width="1492" height="329" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586853243349" />
+    <state width="1492" height="329" key="GridCell.Tab.1.center" timestamp="1586853243348">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1492" height="426" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1586748793571" />
-    <state width="1492" height="426" key="GridCell.Tab.1.left" timestamp="1586748793571">
+    <state width="1492" height="329" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1586853243348" />
+    <state width="1492" height="329" key="GridCell.Tab.1.left" timestamp="1586853243348">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1492" height="426" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1586748793571" />
-    <state width="1492" height="426" key="GridCell.Tab.1.right" timestamp="1586748793571">
+    <state width="1492" height="329" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1586853243348" />
+    <state width="1492" height="329" key="GridCell.Tab.1.right" timestamp="1586853243349">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1492" height="426" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1586748793571" />
+    <state width="1492" height="329" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1586853243349" />
     <state x="299" y="68" key="Maven.ArtifactSearchDialog" timestamp="1586400362513">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="299" y="68" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1586400362513" />
-    <state x="91" y="0" key="SettingsEditor" timestamp="1586744450282">
+    <state x="439" y="112" key="NewModule_or_Project.wizard" timestamp="1586843889363">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="91" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586744450282" />
-    <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1586746326091">
+    <state x="439" y="112" key="NewModule_or_Project.wizard/0.0.1536.824@0.0.1536.824" timestamp="1586843889363" />
+    <state x="114" y="0" key="SettingsEditor" timestamp="1586845079276">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1586746326091" />
+    <state x="114" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586845079276" />
+    <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1586847108918">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1586847108918" />
     <state x="526" y="307" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1586744448082">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -168,21 +244,39 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="463" y="144" width="609" height="536" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1586377744356" />
+    <state x="209" y="108" key="new project wizard" timestamp="1586834922683">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="209" y="108" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1586834922683" />
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1586834637721">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1586834637721" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Bots/botm2.java</url>
-          <line>13</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Bots/test.java</url>
           <line>35</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Bots/botm2.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Bots/test2.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="s" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
