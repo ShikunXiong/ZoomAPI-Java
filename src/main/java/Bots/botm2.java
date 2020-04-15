@@ -40,6 +40,7 @@ public class botm2 {
         String yl_channel_id = props.getProperty("yl_channel_id");
         String yl_member_id = props.getProperty("yl_member_id");
         String del_id = "c1b8c72a-08aa-4e19-bd1d-5fffae8616a6";
+        String yl_email = "tjuwangyilin@163.com";
 
         OauthClient client = new OauthClient();
         client.ApplyToken();
@@ -57,7 +58,15 @@ public class botm2 {
 //        s = zoomAPI.getChatChannels().delete_channel(del_id);
 //        list channel members pass
 //        s = zoomAPI.getChatChannels().list_channel_members(test_channel_id);
-        System.out.println(s);
+//        invite pass
+//        s = zoomAPI.getChatChannels().invite_members(my_channel_id, yl_email);
+//        join channel pass
+//        s = zoomAPI.getChatChannels().join_channel(yl_channel_id);
+//        leave a channel
+//        s = zoomAPI.getChatChannels().leave_channel(yl_channel_id);
+//        remove a memeber pass
+//        s = zoomAPI.getChatChannels().remove_member(my_channel_id, yl_member_id);
+//        System.out.println(s);
     }
 
 }

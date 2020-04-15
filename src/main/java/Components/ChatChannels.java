@@ -88,7 +88,8 @@ public class ChatChannels {
     public String join_channel(String... strs) throws IOException {
         String url = "/chat/channels/%s/members/me";
         url = String.format(url, strs[0]);
-        return this.util.post_request(url, this.token, null);
+        RequestBody body = RequestBody.create(null, "");
+        return this.util.post_request(url, this.token, body);
     }
 
     public String leave_channel(String... strs) throws IOException {
