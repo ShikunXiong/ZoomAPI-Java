@@ -3,7 +3,6 @@ package Bots;
 import Components.ZoomAPI;
 import Utils.OauthClient;
 import java.util.Properties;
-import java.util.Scanner;
 
 public class botm2 {
     public static void main(String[] args) throws Exception {
