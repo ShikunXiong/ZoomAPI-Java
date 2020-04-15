@@ -7,9 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9af5b03-d395-4b61-99bd-d31dd5e27332" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Bots/botm2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Bots/botm2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Components/ChatChannels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Components/ChatChannels.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utils/HttpUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/HttpUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,11 +232,6 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Finished" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
             </expand>
             <select />
