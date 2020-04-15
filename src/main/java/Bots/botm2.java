@@ -1,33 +1,8 @@
 package Bots;
 
 import Components.ZoomAPI;
-import Utils.HttpUtils;
+import Utils.AccessLimitService;
 import Utils.OauthClient;
-import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;
-import okhttp3.*;
-import okhttp3.internal.http2.Header;
-import org.apache.commons.logging.Log;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.oltu.oauth2.client.OAuthClient;
-import org.apache.oltu.oauth2.client.URLConnectionClient;
-import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
-import org.apache.oltu.oauth2.client.response.GitHubTokenResponse;
-import org.apache.oltu.oauth2.client.response.OAuthAuthzResponse;
-import org.apache.oltu.oauth2.client.response.OAuthJSONAccessTokenResponse;
-import org.apache.oltu.oauth2.common.OAuthProviderType;
-import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
-import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
-import org.apache.oltu.oauth2.common.message.types.GrantType;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -47,6 +22,8 @@ public class botm2 {
         System.out.println(client.getToken());
         ZoomAPI zoomAPI = new ZoomAPI(client.getToken());
         String s = "";
+        boolean stop = false;
+        AccessLimitService accessLimitService = new AccessLimitService(0.1);
 //        // get channel list pass
 //        s = zoomAPI.getChatChannels().listChannels();
 //        // get a channel pass
@@ -68,10 +45,39 @@ public class botm2 {
 //        // remove a memeber pass
 //        s = zoomAPI.getChatChannels().removeMember(my_channel_id, yl_member_id);
 //        System.out.println(s);
+//        // List all chat messages
 //        zoomAPI.getChatMessages().listUserChatMessage(yl_channel_id);
+//        // Send a chat message
 //        zoomAPI.getChatMessages().sendChatMessage(yl_channel_id);
+//        // Update a chat message
 //        zoomAPI.getChatMessages().updateChatMessage(yl_channel_id);
+//        // delete a chat message
 //        zoomAPI.getChatMessages().deleteChatMessage(yl_channel_id);
+        while (!stop) {
+            System.out.println("Choose a function");
+            Scanner sc = new Scanner(System.in);
+            int option = 0;
+            if (sc.hasNextLine()) {
+                option = sc.nextInt();
+            }
+            if (option == 9) {
+                stop = true;
+            } else {
+                if (accessLimitService.tryAcquire()) {
+                    switch (option) {
+                        case 1:
+                            zoomAPI.getChatMessages().listUserChatMessage(yl_channel_id);
+                            break;
+                        case 2:
+                            zoomAPI.getChatMessages().sendChatMessage(yl_channel_id);
+                        default:
+                            break;
+                    }
+                } else {
+                    System.out.println("wait for it");
+                }
+            }
+        }
     }
 
 }
