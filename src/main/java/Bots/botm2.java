@@ -20,10 +20,10 @@ public class botm2 {
         OauthClient client = new OauthClient();
         client.ApplyToken();
         System.out.println(client.getToken());
-        ZoomAPI zoomAPI = new ZoomAPI(client.getToken());
+        ZoomAPI zoomAPI = new ZoomAPI(client.getToken(), 0.1);    // calls per second
         String s = "";
         boolean stop = false;
-        AccessLimitService accessLimitService = new AccessLimitService(0.1);
+
 //        // get channel list pass
 //        s = zoomAPI.getChatChannels().listChannels();
 //        // get a channel pass
@@ -63,7 +63,7 @@ public class botm2 {
             if (option == 9) {
                 stop = true;
             } else {
-                if (accessLimitService.tryAcquire()) {
+                if (zoomAPI.getAccessLimitService().tryAcquire()) {
                     switch (option) {
                         case 1:
                             zoomAPI.getChatMessages().listUserChatMessage(yl_channel_id);
