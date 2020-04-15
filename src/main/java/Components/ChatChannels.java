@@ -19,12 +19,12 @@ public class ChatChannels {
         this.token = token;
         this.util = new HttpUtils();
     }
-    public String list_channels(String... strs) throws IOException {
+    public String listChannels(String... strs) throws IOException {
         String url = "/chat/users/me/channels";
-        return this.util.get_request(url, this.token);
+        return this.util.getRequest(url, this.token);
     }
 
-    public String create_channel(String... strs) throws IOException {
+    public String createChannel(String... strs) throws IOException {
 
         String url = "/chat/users/me/channels";
         HashMap map = new HashMap();
@@ -39,41 +39,41 @@ public class ChatChannels {
         jsonObject.put("type", strs[1]);
         jsonObject.put("members", list);
         RequestBody body = RequestBody.create(JSON, jsonObject.toString());
-        return this.util.post_request(url, this.token, body);
+        return this.util.postRequest(url, this.token, body);
     }
 
-    public String get_channel(String... strs) throws IOException {
+    public String getChannel(String... strs) throws IOException {
         String url = "/chat/channels/%s";
         url = String.format(url, strs);
-        return this.util.get_request(url, this.token);
+        return this.util.getRequest(url, this.token);
     }
 
-    public String update_channel(String... strs) throws IOException {
+    public String updateChannel(String... strs) throws IOException {
         String url = "/chat/channels/%s";
         url = String.format(url, strs[0]);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name", strs[1]);
         RequestBody body = RequestBody.create(JSON, jsonObject.toString());
-        return this.util.patch_request(url, this.token, body);
+        return this.util.patchRequest(url, this.token, body);
     }
 
-    public String delete_channel(String... strs) throws IOException {
+    public String deleteChannel(String... strs) throws IOException {
         String url = "/chat/channels/%s";
         url = String.format(url, strs[0]);
-        return this.util.delete_request(url, this.token);
+        return this.util.deleteRequest(url, this.token);
     }
 
-    public String list_channel_members(String... strs) throws IOException {
+    public String listChannelMembers(String... strs) throws IOException {
         String url = "/chat/channels/%s/members";
         url = String.format(url, strs[0]);
-        return this.util.get_request(url, this.token);
+        return this.util.getRequest(url, this.token);
     }
 
-    public String invite_members(String... strs) throws IOException {
+    public String inviteMembers(String... strs) throws IOException {
         String url = "/chat/channels/%s/members";
         url = String.format(url, strs[0]);
-        HashMap map = new HashMap();
-        List<HashMap> list = new ArrayList<>();
+        HashMap<String, String> map = new HashMap<>();
+        List<HashMap<String, String>> list = new ArrayList<>();
         int size = strs.length - 1 ;
         for (int i =0; i<size; i++){
             map.put("email", strs[i+1]);
@@ -82,25 +82,25 @@ public class ChatChannels {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("members", list);
         RequestBody body = RequestBody.create(JSON, jsonObject.toString());
-        return this.util.post_request(url, this.token, body);
+        return this.util.postRequest(url, this.token, body);
     }
 
-    public String join_channel(String... strs) throws IOException {
+    public String joinChannel(String... strs) throws IOException {
         String url = "/chat/channels/%s/members/me";
         url = String.format(url, strs[0]);
         RequestBody body = RequestBody.create(null, "");
-        return this.util.post_request(url, this.token, body);
+        return this.util.postRequest(url, this.token, body);
     }
 
-    public String leave_channel(String... strs) throws IOException {
+    public String leaveChannel(String... strs) throws IOException {
         String url = "/chat/channels/%s/members/me";
         url = String.format(url, strs[0]);
-        return this.util.delete_request(url, this.token);
+        return this.util.deleteRequest(url, this.token);
     }
 
-    public String remove_member(String... strs) throws IOException {
+    public String removeMember(String... strs) throws IOException {
         String url = "/chat/channels/%s/members/%s";
         url = String.format(url, strs[0], strs[1]);
-        return this.util.delete_request(url, this.token);
+        return this.util.deleteRequest(url, this.token);
     }
 }

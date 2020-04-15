@@ -44,29 +44,34 @@ public class botm2 {
 
         OauthClient client = new OauthClient();
         client.ApplyToken();
+        System.out.println(client.getToken());
         ZoomAPI zoomAPI = new ZoomAPI(client.getToken());
         String s = "";
-//        get channel list pass
-//        s = zoomAPI.getChatChannels().list_channels();
-//        get a channel pass
-//        s = zoomAPI.getChatChannels().get_channel(my_channel_id);
-//        create a channel pass
-//        s = zoomAPI.getChatChannels().create_channel("new2", "1", "aa@gmail.com");
-//        update a channel pass
-//        s = zoomAPI.getChatChannels().update_channel(my_channel_id, "my_ttest");
-//        delete a channel pass
-//        s = zoomAPI.getChatChannels().delete_channel(del_id);
-//        list channel members pass
-//        s = zoomAPI.getChatChannels().list_channel_members(test_channel_id);
-//        invite pass
-//        s = zoomAPI.getChatChannels().invite_members(my_channel_id, yl_email);
-//        join channel pass
-//        s = zoomAPI.getChatChannels().join_channel(yl_channel_id);
-//        leave a channel
-//        s = zoomAPI.getChatChannels().leave_channel(yl_channel_id);
-//        remove a memeber pass
-//        s = zoomAPI.getChatChannels().remove_member(my_channel_id, yl_member_id);
+//        // get channel list pass
+//        s = zoomAPI.getChatChannels().listChannels();
+//        // get a channel pass
+//         s = zoomAPI.getChatChannels().getChannel(my_channel_id);
+//        // create a channel pass
+//        s = zoomAPI.getChatChannels().createChannel("new2", "1", "aa@gmail.com");
+//        // update a channel pass
+//        s = zoomAPI.getChatChannels().updateChannel(my_channel_id, "my_ttest");
+//        // delete a channel pass
+//        s = zoomAPI.getChatChannels().deleteChannel(del_id);
+//        // list channel members pass
+//        s = zoomAPI.getChatChannels().listChannelMembers(test_channel_id);
+//        // invite pass
+//        s = zoomAPI.getChatChannels().inviteMembers(my_channel_id, yl_email);
+//        // join channel pass
+//        s = zoomAPI.getChatChannels().joinChannel(yl_channel_id);
+//        // leave a channel
+//        s = zoomAPI.getChatChannels().leaveChannel(yl_channel_id);
+//        // remove a memeber pass
+//        s = zoomAPI.getChatChannels().removeMember(my_channel_id, yl_member_id);
 //        System.out.println(s);
+//        zoomAPI.getChatMessages().listUserChatMessage(yl_channel_id);
+//        zoomAPI.getChatMessages().sendChatMessage(yl_channel_id);
+//        zoomAPI.getChatMessages().updateChatMessage(yl_channel_id);
+//        zoomAPI.getChatMessages().deleteChatMessage(yl_channel_id);
     }
 
 }

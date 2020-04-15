@@ -37,7 +37,7 @@ public class OauthClient {
         if (scanner.hasNextLine()) {
             code = scanner.nextLine();
         }
-        scanner.close();
+
         OAuthClientRequest ClientRequest = OAuthClientRequest
                 .tokenLocation(props.getProperty("token_url"))
                 .setGrantType(GrantType.AUTHORIZATION_CODE)
