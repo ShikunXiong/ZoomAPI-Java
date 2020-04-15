@@ -1,5 +1,6 @@
 package Bots;
 
+import Components.ZoomAPI;
 import Utils.HttpUtils;
 import Utils.OauthClient;
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
@@ -32,13 +33,24 @@ import java.util.Scanner;
 
 public class botm2 {
     public static void main(String[] args) throws Exception {
+        Properties props = new Properties();
+        props.load(new java.io.FileInputStream("src/settings.properties"));
+        String test_channel_id = props.getProperty("test_channel_id");
+        String my_channel_id = props.getProperty("my_channel_id");
+        String yl_channel_id = props.getProperty("yl_channel_id");
+        String yl_member_id = props.getProperty("yl_member_id");
+
+
         OauthClient client = new OauthClient();
         client.ApplyToken();
-
-        HttpUtils util = new HttpUtils();
-        String s = util.get_request("/chat/users/me/channels", client.getToken());
+        ZoomAPI zoomAPI = new ZoomAPI(client.getToken());
+//         get channel list pass
+//         String s = zoomAPI.getChatChannels().list_channels();
+//         get a channel pass
+//         String s = zoomAPI.getChatChannels().get_channel(my_channel_id);
+//         create a channel pass
+        String s = zoomAPI.getChatChannels().create_channel("new2", "1", "aa@gmail.com");
         System.out.println(s);
-        int i = 21;
     }
 
 }

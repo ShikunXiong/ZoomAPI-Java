@@ -23,15 +23,13 @@ public class HttpUtils {
         }
     }
 
-    public String post_request(String url, RequestBody body) throws IOException {
+    public String post_request(String url, String token, RequestBody body) throws IOException {
             OkHttpClient client = new OkHttpClient();
-            Base64.Encoder encoder = Base64.getEncoder();
-            String s = "QMXaCuYT8iuhYPJokx4lw:k3BKaBQUubz3fFihp80JzZ7eg5vKyGno";
-            s = encoder.encodeToString(s.getBytes());
-            String auth = "Basic " + s;
+            String valid_token = "Bearer " + token;
             Request request = new Request.Builder()
-                    .url(url)
-                    .addHeader("Authorization", auth)
+                    .url(BASE_URL + url)
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Authorization", valid_token)
                     .post(body)
                     .build();
             try (Response response = client.newCall(request).execute()) {
