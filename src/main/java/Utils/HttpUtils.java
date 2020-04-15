@@ -36,7 +36,34 @@ public class HttpUtils {
                 return response.body().string();
             }
         }
+    public String patch_request(String url, String token, RequestBody body) throws IOException {
+            OkHttpClient client = new OkHttpClient();
+            String valid_token = "Bearer " + token;
+            Request request = new Request.Builder()
+                    .url(BASE_URL + url)
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Authorization", valid_token)
+                    .patch(body)
+                    .build();
+        try (Response response = client.newCall(request).execute()) {
+            String code = String.valueOf(response.code());
+            return code + response.body().string();
+        }
+    }
 
+    public String delete_request(String url, String token) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        String valid_token = "Bearer " + token;
+        Request request = new Request.Builder()
+                .url(BASE_URL + url)
+                .addHeader("Authorization", valid_token)
+                .delete()
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            String code = String.valueOf(response.code());
+            return code + response.body().string();
+        }
+    }
 }
 
 

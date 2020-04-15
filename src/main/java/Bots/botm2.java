@@ -39,17 +39,24 @@ public class botm2 {
         String my_channel_id = props.getProperty("my_channel_id");
         String yl_channel_id = props.getProperty("yl_channel_id");
         String yl_member_id = props.getProperty("yl_member_id");
-
+        String del_id = "c1b8c72a-08aa-4e19-bd1d-5fffae8616a6";
 
         OauthClient client = new OauthClient();
         client.ApplyToken();
         ZoomAPI zoomAPI = new ZoomAPI(client.getToken());
-//         get channel list pass
-//         String s = zoomAPI.getChatChannels().list_channels();
-//         get a channel pass
-//         String s = zoomAPI.getChatChannels().get_channel(my_channel_id);
-//         create a channel pass
-        String s = zoomAPI.getChatChannels().create_channel("new2", "1", "aa@gmail.com");
+        String s = "";
+//        get channel list pass
+//        s = zoomAPI.getChatChannels().list_channels();
+//        get a channel pass
+//        s = zoomAPI.getChatChannels().get_channel(my_channel_id);
+//        create a channel pass
+//        s = zoomAPI.getChatChannels().create_channel("new2", "1", "aa@gmail.com");
+//        update a channel pass
+//        s = zoomAPI.getChatChannels().update_channel(my_channel_id, "my_ttest");
+//        delete a channel pass
+//        s = zoomAPI.getChatChannels().delete_channel(del_id);
+//        list channel members pass
+//        s = zoomAPI.getChatChannels().list_channel_members(test_channel_id);
         System.out.println(s);
     }
 
