@@ -3,7 +3,6 @@ package Utils;
 import okhttp3.*;
 
 import java.io.IOException;
-import java.util.Base64;
 
 public class HttpUtils {
     public static final String BASE_URL = "https://api.zoom.us/v2";
