@@ -3,7 +3,6 @@ package Utils;
 import okhttp3.*;
 
 import java.io.IOException;
-import java.util.Base64;
 
 public class HttpUtils {
     public static final String BASE_URL = "https://api.zoom.us/v2";
@@ -51,7 +50,7 @@ public class HttpUtils {
         }
     }
 
-    public String putRequest(String url, String token, RequestBody body) throws IOException {
+    public void putRequest(String url, String token, RequestBody body) throws IOException {
         OkHttpClient client = new OkHttpClient();
         String valid_token = "Bearer " + token;
         Request request = new Request.Builder()
@@ -62,7 +61,7 @@ public class HttpUtils {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String code = String.valueOf(response.code());
-            return code + response.body().string();
+            response.body().string();
         }
     }
 

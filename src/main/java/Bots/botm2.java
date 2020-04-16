@@ -18,7 +18,7 @@ public class botm2 {
         String yl_email = "tjuwangyilin@163.com";
 
         OauthClient client = new OauthClient();
-        client.ApplyToken();
+        client.authorize();
         System.out.println(client.getToken());
         ZoomAPI zoomAPI = new ZoomAPI(client.getToken(), 0.1);    // calls per second
         String s = "";

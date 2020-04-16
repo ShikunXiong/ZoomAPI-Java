@@ -7,9 +7,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9af5b03-d395-4b61-99bd-d31dd5e27332" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/ZoomAPI-Java.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_json.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_json1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/servlet_api.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ngrok-java-master/META-INF/MANIFEST.MF" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Bots/botm2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Bots/botm2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Components/ChatChannels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Components/ChatChannels.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utils/HttpUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/HttpUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utils/OauthClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/OauthClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/settings.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/settings.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +61,6 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -68,7 +77,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15234375" />
     <property name="project.structure.side.proportion" value="0.39655173" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -96,7 +105,7 @@
     </configuration>
     <configuration name="botm2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Bots.botm2" />
-      <module name="ZoomAPI" />
+      <module name="ZoomAPI-Java" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -224,29 +233,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <option name="contentProportion" value="0.22214627" />
-          <treeState>
-            <expand>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Finished" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
-            </expand>
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -264,21 +250,30 @@
       <workItem from="1586743701344" duration="4867000" />
       <workItem from="1586831816547" duration="15708000" />
       <workItem from="1586885976773" duration="21427000" />
+      <workItem from="1586937025681" duration="585000" />
+      <workItem from="1586980264055" duration="1510000" />
+      <workItem from="1586983823050" duration="4056000" />
+      <workItem from="1587074901200" duration="2249000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="360" y="71" key="#Tomcat_Server" timestamp="1586886352242">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="360" y="71" key="#Tomcat_Server/0.0.1536.824@0.0.1536.824" timestamp="1586886352242" />
-    <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586886867360">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="720" y="180" key="#botm2" timestamp="1586986177138">
+      <screen x="0" y="0" width="2048" height="1122" />
+    </state>
+    <state x="720" y="180" key="#botm2/0.0.2048.1122@0.0.2048.1122" timestamp="1586986177138" />
+    <state x="297" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586984854044">
+      <screen x="0" y="0" width="2048" height="1122" />
     </state>
     <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1586886867360" />
+    <state x="297" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2048.1122@0.0.2048.1122" timestamp="1586984854044" />
     <state x="517" y="250" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1586400586327">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -295,22 +290,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="501" y="155" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1586886904419" />
-    <state width="1492" height="472" key="GridCell.Tab.0.bottom" timestamp="1586919432921">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="2004" height="309" key="GridCell.Tab.0.bottom" timestamp="1586987882230">
+      <screen x="0" y="0" width="2048" height="1122" />
     </state>
     <state width="1492" height="472" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586919432921" />
-    <state width="1492" height="472" key="GridCell.Tab.0.center" timestamp="1586919432921">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="2004" height="309" key="GridCell.Tab.0.bottom/0.0.2048.1122@0.0.2048.1122" timestamp="1586987882230" />
+    <state width="2004" height="309" key="GridCell.Tab.0.center" timestamp="1586987882230">
+      <screen x="0" y="0" width="2048" height="1122" />
     </state>
     <state width="1492" height="472" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586919432921" />
-    <state width="1492" height="472" key="GridCell.Tab.0.left" timestamp="1586919432921">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="2004" height="309" key="GridCell.Tab.0.center/0.0.2048.1122@0.0.2048.1122" timestamp="1586987882230" />
+    <state width="2004" height="309" key="GridCell.Tab.0.left" timestamp="1586987882230">
+      <screen x="0" y="0" width="2048" height="1122" />
     </state>
     <state width="1492" height="472" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586919432921" />
-    <state width="1492" height="472" key="GridCell.Tab.0.right" timestamp="1586919432921">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="2004" height="309" key="GridCell.Tab.0.left/0.0.2048.1122@0.0.2048.1122" timestamp="1586987882230" />
+    <state width="2004" height="309" key="GridCell.Tab.0.right" timestamp="1586987882230">
+      <screen x="0" y="0" width="2048" height="1122" />
     </state>
     <state width="1492" height="472" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586919432921" />
+    <state width="2004" height="309" key="GridCell.Tab.0.right/0.0.2048.1122@0.0.2048.1122" timestamp="1586987882230" />
     <state width="1492" height="329" key="GridCell.Tab.1.bottom" timestamp="1586916482081">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -343,6 +342,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1137" height="579" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1586887465541" />
+    <state x="353" y="296" key="IDE.errors.dialog" timestamp="1586980511745">
+      <screen x="0" y="0" width="2048" height="1122" />
+    </state>
+    <state x="353" y="296" key="IDE.errors.dialog/0.0.2048.1122@0.0.2048.1122" timestamp="1586980511745" />
     <state x="299" y="68" key="Maven.ArtifactSearchDialog" timestamp="1586400362513">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -351,26 +354,29 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="439" y="112" key="NewModule_or_Project.wizard/0.0.1536.824@0.0.1536.824" timestamp="1586843889363" />
-    <state x="114" y="0" key="SettingsEditor" timestamp="1586887375577">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="152" y="0" key="SettingsEditor" timestamp="1586986058008">
+      <screen x="0" y="0" width="2048" height="1122" />
     </state>
     <state x="114" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586887375577" />
+    <state x="152" y="0" key="SettingsEditor/0.0.2048.1122@0.0.2048.1122" timestamp="1586986058008" />
     <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1586889093669">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1586889093669" />
-    <state x="499" y="298" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1586887373928">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="665" y="406" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1586984290692">
+      <screen x="0" y="0" width="2048" height="1122" />
     </state>
     <state x="499" y="298" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1536.824@0.0.1536.824" timestamp="1586887373928" />
+    <state x="665" y="406" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.2048.1122@0.0.2048.1122" timestamp="1586984290692" />
     <state x="463" y="144" width="609" height="536" key="find.popup" timestamp="1586377744356">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="463" y="144" width="609" height="536" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1586377744356" />
-    <state x="215" y="0" key="new project wizard" timestamp="1586887577716">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="287" y="0" key="new project wizard" timestamp="1586984536333">
+      <screen x="0" y="0" width="2048" height="1122" />
     </state>
     <state x="215" y="0" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1586887577716" />
+    <state x="287" y="0" key="new project wizard/0.0.2048.1122@0.0.2048.1122" timestamp="1586984536333" />
     <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1586834637721">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

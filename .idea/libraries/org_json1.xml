@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="org.json1">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../modules/ngrok-java-master/lib/org.json.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

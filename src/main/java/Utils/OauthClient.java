@@ -20,7 +20,7 @@ public class OauthClient {
         return this.token;
     }
 
-    public void ApplyToken() throws OAuthSystemException, IOException, OAuthProblemException {
+    public void authorize() throws OAuthSystemException, IOException, OAuthProblemException {
         Properties props = new Properties();
         props.load(new java.io.FileInputStream("src/settings.properties"));
         String browser_path = props.getProperty("browser_path");
