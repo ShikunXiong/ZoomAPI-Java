@@ -12,18 +12,22 @@ public class ZoomAPI {
         this.chatMessages = new ChatMessages(token);
         this.accessLimitService = new AccessLimitService(limit);
     }
-    public ChatChannels getChatChannels() {
+    public ChatChannels getChatChannels() throws InterruptedException {
         if (this.accessLimitService.tryAcquire()) {
             return chatChannels;
         } else {
-            return null;
+            System.out.println("Visited too frequently, wait for 1s");
+            Thread.sleep(1000);
+            return chatChannels;
         }
     }
-    public ChatMessages getChatMessages() {
+    public ChatMessages getChatMessages() throws InterruptedException {
         if (this.accessLimitService.tryAcquire()) {
             return chatMessages;
         } else {
-            return null;
+            System.out.println("Visited too frequently, wait for 1s");
+            Thread.sleep(1000);
+            return chatMessages;
         }
     }
     public AccessLimitService getAccessLimitService() {

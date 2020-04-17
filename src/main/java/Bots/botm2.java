@@ -5,8 +5,9 @@ import Components.ChatMessages;
 import Components.ZoomAPI;
 import Utils.AccessLimitService;
 import Utils.OauthClient;
-import java.util.Properties;
-import java.util.Scanner;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class botm2 {
     public static void main(String[] args) throws Exception {
@@ -23,7 +24,7 @@ public class botm2 {
         client.ngrok();
         client.authorize();
         System.out.println(client.getToken());
-        ZoomAPI zoomAPI = new ZoomAPI(client.getToken(), 10);    // calls per second
+        ZoomAPI zoomAPI = new ZoomAPI(client.getToken(), 1);    // calls per second
         String s = "";
         boolean stop = false;
 
@@ -56,33 +57,62 @@ public class botm2 {
 //        zoomAPI.getChatMessages().updateChatMessage(yl_channel_id);
 //        // delete a chat message
 //        zoomAPI.getChatMessages().deleteChatMessage(yl_channel_id);
-        while (true) {
-            System.out.println("Choose a function");
-            Scanner sc = new Scanner(System.in);
-            int option = 0;
-            if (sc.hasNextLine()) {
-                option = sc.nextInt();
-            }
-            if (option == 9) {
-                System.exit(1);
-            } else {
-                ChatChannels chatChannels = zoomAPI.getChatChannels();
-                ChatMessages chatMessages = zoomAPI.getChatMessages();
-                if (chatChannels != null && chatMessages != null) {
-                    switch (option) {
-                        case 1:
-                            chatMessages.listUserChatMessage(yl_channel_id);
-                            break;
-                        case 2:
-                            chatMessages.sendChatMessage(yl_channel_id);
-                        default:
-                            break;
-                    }
-                } else {
-                    System.out.println("wait for it");
-                }
-            }
-        }
+
+
+//        // list
+//        Map<String, String> queryMap = new HashMap<>();
+//        queryMap.put("to_channel", yl_channel_id);
+//        zoomAPI.getChatMessages().listUserChatMessage(queryMap);
+//        // put
+//        Map<String, String> bodyMap = new HashMap<>();
+//        String newMessage = "This is a new message sent in " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+//        bodyMap.put("message", newMessage);
+//        bodyMap.put("to_channel", yl_channel_id);
+//        zoomAPI.getChatMessages().sendChatMessage(bodyMap);
+//        // Update
+//        String messageID = "470d3d68-0afd-40a8-8f17-3509169dc8b0";
+//        String updateMessage = "This is an updated message sent in " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+//        Map<String, String> bodyMap = new HashMap<>();
+//        bodyMap.put("message", updateMessage);
+//        bodyMap.put("to_channel", yl_channel_id);
+//        zoomAPI.getChatMessages().updateChatMessage(messageID, bodyMap);
+//        // Delete
+//        String messageID = "470d3d68-0afd-40a8-8f17-3509169dc8b0";
+//        Map<String, String> queryMap = new HashMap<>();
+//        queryMap.put("to_channel", yl_channel_id);
+//        zoomAPI.getChatMessages().deleteChatMessage(messageID, queryMap);
     }
+
+
+    //        while (true) {
+//            System.out.println("Choose a function");
+//            Scanner sc = new Scanner(System.in);
+//            int option = 0;
+//            if (sc.hasNextLine()) {
+//                option = sc.nextInt();
+//            }
+//            if (option == 9) {
+//                System.exit(1);
+//            } else {
+//                ChatChannels chatChannels = zoomAPI.getChatChannels();
+//                ChatMessages chatMessages = zoomAPI.getChatMessages();
+//                if (chatChannels != null && chatMessages != null) {
+//                    switch (option) {
+//                        case 1:
+//                            chatMessages.listUserChatMessage(yl_channel_id);
+//                            break;
+//                        case 2:
+//                            chatMessages.sendChatMessage(yl_channel_id);
+//                        default:
+//                            break;
+//                    }
+//                } else {
+//                    System.out.println("wait for it");
+//                }
+//            }
+//        }
+
+
+
 
 }
