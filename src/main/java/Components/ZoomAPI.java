@@ -3,9 +3,9 @@ package Components;
 import Utils.AccessLimitService;
 
 public class ZoomAPI {
-    private ChatChannels chatChannels;
-    private ChatMessages chatMessages;
-    private AccessLimitService accessLimitService;
+    private final ChatChannels chatChannels;
+    private final ChatMessages chatMessages;
+    private final AccessLimitService accessLimitService;
 
     public ZoomAPI(String token, double limit){
         this.chatChannels = new ChatChannels(token);
@@ -13,9 +13,19 @@ public class ZoomAPI {
         this.accessLimitService = new AccessLimitService(limit);
     }
     public ChatChannels getChatChannels() {
-        return chatChannels;
+        if (this.accessLimitService.tryAcquire()) {
+            return chatChannels;
+        } else {
+            return null;
+        }
     }
-    public ChatMessages getChatMessages() { return chatMessages; }
+    public ChatMessages getChatMessages() {
+        if (this.accessLimitService.tryAcquire()) {
+            return chatMessages;
+        } else {
+            return null;
+        }
+    }
     public AccessLimitService getAccessLimitService() {
         return accessLimitService;
     }

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChatChannels {
     String token;
@@ -26,8 +27,8 @@ public class ChatChannels {
     public String createChannel(String... strs) throws IOException {
 
         String url = "/chat/users/me/channels";
-        HashMap map = new HashMap();
-        List<HashMap> list = new ArrayList<>();
+        Map<String, String> map = new HashMap<>();
+        List<Map<String, String>> list = new ArrayList<>();
         int size = strs.length - 2 ;
         for (int i =0; i<size; i++){
             map.put("email", strs[i+2]);

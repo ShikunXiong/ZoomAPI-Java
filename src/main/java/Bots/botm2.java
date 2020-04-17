@@ -1,5 +1,7 @@
 package Bots;
 
+import Components.ChatChannels;
+import Components.ChatMessages;
 import Components.ZoomAPI;
 import Utils.AccessLimitService;
 import Utils.OauthClient;
@@ -18,9 +20,10 @@ public class botm2 {
         String yl_email = "tjuwangyilin@163.com";
 
         OauthClient client = new OauthClient();
+        client.ngrok();
         client.authorize();
         System.out.println(client.getToken());
-        ZoomAPI zoomAPI = new ZoomAPI(client.getToken(), 0.1);    // calls per second
+        ZoomAPI zoomAPI = new ZoomAPI(client.getToken(), 10);    // calls per second
         String s = "";
         boolean stop = false;
 
@@ -53,7 +56,7 @@ public class botm2 {
 //        zoomAPI.getChatMessages().updateChatMessage(yl_channel_id);
 //        // delete a chat message
 //        zoomAPI.getChatMessages().deleteChatMessage(yl_channel_id);
-        while (!stop) {
+        while (true) {
             System.out.println("Choose a function");
             Scanner sc = new Scanner(System.in);
             int option = 0;
@@ -61,15 +64,17 @@ public class botm2 {
                 option = sc.nextInt();
             }
             if (option == 9) {
-                stop = true;
+                System.exit(1);
             } else {
-                if (zoomAPI.getAccessLimitService().tryAcquire()) {
+                ChatChannels chatChannels = zoomAPI.getChatChannels();
+                ChatMessages chatMessages = zoomAPI.getChatMessages();
+                if (chatChannels != null && chatMessages != null) {
                     switch (option) {
                         case 1:
-                            zoomAPI.getChatMessages().listUserChatMessage(yl_channel_id);
+                            chatMessages.listUserChatMessage(yl_channel_id);
                             break;
                         case 2:
-                            zoomAPI.getChatMessages().sendChatMessage(yl_channel_id);
+                            chatMessages.sendChatMessage(yl_channel_id);
                         default:
                             break;
                     }
