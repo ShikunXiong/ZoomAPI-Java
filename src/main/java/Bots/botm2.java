@@ -23,6 +23,8 @@ public class botm2 {
         String s = "";
         boolean stop = false;
 
+        //s = zoomAPI.getMeeting().create();
+
 //        // get channel list pass
 //        s = zoomAPI.getChatChannels().listChannels();
 //        // get a channel pass
@@ -52,31 +54,31 @@ public class botm2 {
 //        zoomAPI.getChatMessages().updateChatMessage(yl_channel_id);
 //        // delete a chat message
 //        zoomAPI.getChatMessages().deleteChatMessage(yl_channel_id);
-        while (!stop) {
-            System.out.println("Choose a function");
-            Scanner sc = new Scanner(System.in);
-            int option = 0;
-            if (sc.hasNextLine()) {
-                option = sc.nextInt();
-            }
-            if (option == 9) {
-                stop = true;
-            } else {
-                if (zoomAPI.getAccessLimitService().tryAcquire()) {
-                    switch (option) {
-                        case 1:
-                            zoomAPI.getChatMessages().listUserChatMessage(yl_channel_id);
-                            break;
-                        case 2:
-                            zoomAPI.getChatMessages().sendChatMessage(yl_channel_id);
-                        default:
-                            break;
-                    }
-                } else {
-                    System.out.println("wait for it");
-                }
-            }
-        }
+//        while (!stop) {
+//            System.out.println("Choose a function");
+//            Scanner sc = new Scanner(System.in);
+//            int option = 0;
+//            if (sc.hasNextLine()) {
+//                option = sc.nextInt();
+//            }
+//            if (option == 9) {
+//                stop = true;
+//            } else {
+//                if (zoomAPI.getAccessLimitService().tryAcquire()) {
+//                    switch (option) {
+//                        case 1:
+//                            zoomAPI.getChatMessages().listUserChatMessage(yl_channel_id);
+//                            break;
+//                        case 2:
+//                            zoomAPI.getChatMessages().sendChatMessage(yl_channel_id);
+//                        default:
+//                            break;
+//                    }
+//                } else {
+//                    System.out.println("wait for it");
+//                }
+//            }
+//        }
     }
 
 }
