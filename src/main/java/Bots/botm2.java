@@ -29,8 +29,7 @@ public class botm2 {
         boolean stop = false;
 
 //        // get channel list pass
-        s = zoomAPI.getChatChannels().listChannels();
-        System.out.println(s);
+//        s = zoomAPI.getChatChannels().listChannels();
 //        // get a channel pass
 //         s = zoomAPI.getChatChannels().getChannel(my_channel_id);
 //        // create a channel pass
