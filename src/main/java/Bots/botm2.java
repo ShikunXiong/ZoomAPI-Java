@@ -26,7 +26,8 @@ public class botm2 {
         //s = zoomAPI.getMeeting().create();
 
 //        // get channel list pass
-//        s = zoomAPI.getChatChannels().listChannels();
+        s = zoomAPI.getChatChannels().listChannels();
+        System.out.println(s);
 //        // get a channel pass
 //         s = zoomAPI.getChatChannels().getChannel(my_channel_id);
 //        // create a channel pass
