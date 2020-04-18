@@ -1,75 +1,57 @@
 package Utils;
 
-import com.mashape.unirest.http.exceptions.UnirestException;
-import com.sun.net.httpserver.HttpServer;
-import org.apache.oltu.oauth2.client.OAuthClient;
-import org.apache.oltu.oauth2.client.URLConnectionClient;
-import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
-import org.apache.oltu.oauth2.client.response.OAuthJSONAccessTokenResponse;
-import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
-import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
-import org.apache.oltu.oauth2.common.message.types.GrantType;
-import xyz.dmanchon.ngrok.client.NgrokTunnel;
+import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
+import com.google.api.client.auth.oauth2.BearerToken;
+import com.google.api.client.auth.oauth2.ClientParametersAuthentication;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
+import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.Scanner;
+import java.util.*;
 
 public class OauthClient implements Auth {
     String token = "";
-    String redirect_url;
+    Credential credential;
 
     public String getToken() {
-        return this.token;
+        return this.credential.getAccessToken();
     }
 
     @Override
-    public void authorize() throws OAuthSystemException, IOException, OAuthProblemException {
+    public void authorize() throws IOException {
+        final String SCOPE = "read";
+        final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
+        JsonFactory JSON_FACTORY = new JacksonFactory();
         Properties props = new Properties();
         props.load(new java.io.FileInputStream("src/settings.properties"));
-        String browser_path = props.getProperty("browser_path");
-        String authorize_url = props.getProperty("authorize_url") + redirect_url;
-
-        List<String> cmd = new ArrayList<String>();
-        cmd.add(browser_path);
-        cmd.add(authorize_url);
-        ProcessBuilder process = new ProcessBuilder(cmd);
-        process.start();
-        System.out.println("Input the code: ");
-        String code = "";
-        Scanner scanner = new Scanner(System.in);
-        if (scanner.hasNextLine()) {
-            code = scanner.nextLine();
+        final String TOKEN_SERVER_URL =props.getProperty("authorize_url") ;
+        final String AUTHORIZATION_SERVER_URL = props.getProperty("token_url");
+        final String client_id = props.getProperty("client_id");
+        final String client_secret = props.getProperty("client_secret");
+        final String redirect_url = props.getProperty("redirect_url");
+        final int port = Integer.parseInt(props.getProperty("port"));
+        AuthorizationCodeFlow flow = new AuthorizationCodeFlow.Builder(BearerToken
+                .authorizationHeaderAccessMethod(),
+                HTTP_TRANSPORT,
+                JSON_FACTORY,
+                new GenericUrl(TOKEN_SERVER_URL),
+                new ClientParametersAuthentication(
+                        client_id, client_secret),
+                client_id,
+                AUTHORIZATION_SERVER_URL).setScopes(Arrays.asList(SCOPE))
+                .build();
+            // authorize
+            LocalServerReceiver receiver = new LocalServerReceiver.Builder().setHost(
+                    redirect_url).setPort(port).build();
+            credential = new AuthorizationCodeInstalledApp(flow, receiver).authorize("me");
         }
-
-        OAuthClientRequest ClientRequest = OAuthClientRequest
-                .tokenLocation(props.getProperty("token_url"))
-                .setGrantType(GrantType.AUTHORIZATION_CODE)
-                .setClientId(props.getProperty("client_id"))
-                .setClientSecret(props.getProperty("client_secret"))
-                .setRedirectURI(redirect_url)
-                .setCode(code)
-                .buildQueryMessage();
-        OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
-        OAuthJSONAccessTokenResponse oAuthResponse = oAuthClient.accessToken(ClientRequest, "POST");
-
-        String accessToken = oAuthResponse.getAccessToken();
-        //Long expiresIn = oAuthResponse.getExpiresIn();
-        this.token = accessToken;
     }
 
-    public void ngrok() throws UnirestException, IOException {
-        NgrokTunnel tunnel = new NgrokTunnel("http://127.0.0.1:4040", 8000);
-        //Get the public url:
-        redirect_url = tunnel.url();
-        //Close the tunnel:
-        System.out.println(redirect_url);
-        // Start HttpServer
-        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
-        server.createContext("/", new MyHttpHandler());
-        server.start();
-    }
-}
+
+
