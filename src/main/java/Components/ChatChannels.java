@@ -12,13 +12,15 @@ import java.util.List;
 import java.util.Map;
 
 public class ChatChannels {
+    private final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     String token;
     HttpUtils util;
-    private final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    public ChatChannels(String token){
+
+    public ChatChannels(String token) {
         this.token = token;
         this.util = new HttpUtils();
     }
+
     public String listChannels(String... strs) throws IOException {
         String url = "/chat/users/me/channels";
         return this.util.getRequest(url, this.token);
@@ -29,9 +31,9 @@ public class ChatChannels {
         String url = "/chat/users/me/channels";
         Map<String, String> map = new HashMap<>();
         List<Map<String, String>> list = new ArrayList<>();
-        int size = strs.length - 2 ;
-        for (int i =0; i<size; i++){
-            map.put("email", strs[i+2]);
+        int size = strs.length - 2;
+        for (int i = 0; i < size; i++) {
+            map.put("email", strs[i + 2]);
             list.add(map);
         }
         JSONObject jsonObject = new JSONObject();
@@ -74,9 +76,9 @@ public class ChatChannels {
         url = String.format(url, strs[0]);
         HashMap<String, String> map = new HashMap<>();
         List<HashMap<String, String>> list = new ArrayList<>();
-        int size = strs.length - 1 ;
-        for (int i =0; i<size; i++){
-            map.put("email", strs[i+1]);
+        int size = strs.length - 1;
+        for (int i = 0; i < size; i++) {
+            map.put("email", strs[i + 1]);
             list.add(map);
         }
         JSONObject jsonObject = new JSONObject();
