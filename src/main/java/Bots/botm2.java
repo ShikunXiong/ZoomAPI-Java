@@ -17,7 +17,7 @@ public class botm2 {
         String yl_email = "tjuwangyilin@163.com";
 
         OauthClient client = new OauthClient();
-        client.ApplyToken();
+        client.authorize();
         System.out.println(client.getToken());
         ZoomAPI zoomAPI = new ZoomAPI(client.getToken(), 0.1);    // calls per second
         String s = "";
@@ -79,6 +79,30 @@ public class botm2 {
 //                }
 //            }
 //        }
+
+        //Test Codes for ChatMessages
+        // list
+//        Map<String, String> queryMap = new HashMap<>();
+//        queryMap.put("to_channel", yl_channel_id);
+//        zoomAPI.getChatMessages().listUserChatMessage(queryMap);
+//        // put
+//        Map<String, String> bodyMap = new HashMap<>();
+//        String newMessage = "This is a new message sent in " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+//        bodyMap.put("message", newMessage);
+//        bodyMap.put("to_channel", yl_channel_id);
+//        zoomAPI.getChatMessages().sendChatMessage(bodyMap);
+//        // Update
+//        String messageID = "470d3d68-0afd-40a8-8f17-3509169dc8b0";
+//        String updateMessage = "This is an updated message sent in " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+//        Map<String, String> bodyMap = new HashMap<>();
+//        bodyMap.put("message", updateMessage);
+//        bodyMap.put("to_channel", yl_channel_id);
+//        zoomAPI.getChatMessages().updateChatMessage(messageID, bodyMap);
+//        // Delete
+//        String messageID = "470d3d68-0afd-40a8-8f17-3509169dc8b0";
+//        Map<String, String> queryMap = new HashMap<>();
+//        queryMap.put("to_channel", yl_channel_id);
+//        zoomAPI.getChatMessages().deleteChatMessage(messageID, queryMap);
     }
 
 }
