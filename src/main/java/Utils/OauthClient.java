@@ -18,11 +18,10 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 
-public class OauthClient implements Auth {
+public class OauthClient implements Auth{
     String token = "";
     String redirect_url;
-
-    public String getToken() {
+    public String getToken(){
         return this.token;
     }
 
@@ -31,7 +30,7 @@ public class OauthClient implements Auth {
         Properties props = new Properties();
         props.load(new java.io.FileInputStream("src/settings.properties"));
         String browser_path = props.getProperty("browser_path");
-        String authorize_url = props.getProperty("authorize_url") + redirect_url;
+        String authorize_url = props.getProperty("authorize_url" ) + redirect_url;
 
         List<String> cmd = new ArrayList<String>();
         cmd.add(browser_path);

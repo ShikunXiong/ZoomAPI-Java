@@ -1,5 +1,6 @@
 package Utils;
 
+import com.alibaba.fastjson.util.IOUtils;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -7,29 +8,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MyHttpHandler implements HttpHandler {
-
-    public static Map<String, String> formData2Dic(String formData) {
-        Map<String, String> result = new HashMap<>();
-        if (formData == null || formData.trim().length() == 0) {
-            return result;
-        }
-        final String[] items = formData.split("&");
-        Arrays.stream(items).forEach(item -> {
-            final String[] keyAndVal = item.split("=");
-            if (keyAndVal.length == 2) {
-                final String key = URLDecoder.decode(keyAndVal[0], StandardCharsets.UTF_8);
-                final String val = URLDecoder.decode(keyAndVal[1], StandardCharsets.UTF_8);
-                result.put(key, val);
-            }
-        });
-        return result;
-    }
 
     @Override
     public void handle(HttpExchange exchange) {
@@ -57,6 +40,26 @@ public class MyHttpHandler implements HttpHandler {
         } catch (Exception e) {
 
         }
+    }
+
+    public static Map<String, String> formData2Dic(String formData) {
+        Map<String, String> result = new HashMap<>();
+        if (formData == null || formData.trim().length() == 0) {
+            return result;
+        }
+        final String[] items = formData.split("&");
+        Arrays.stream(items).forEach(item -> {
+            final String[] keyAndVal = item.split("=");
+            if (keyAndVal.length == 2) {
+                try {
+                    final String key = URLDecoder.decode(keyAndVal[0], "utf8");
+                    final String val = URLDecoder.decode(keyAndVal[1], "utf8");
+                    result.put(key, val);
+                } catch (UnsupportedEncodingException e) {
+                }
+            }
+        });
+        return result;
     }
 
 }
