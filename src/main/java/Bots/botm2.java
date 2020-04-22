@@ -57,27 +57,73 @@ public class botm2 {
                 if (sc.hasNextLine()) {
                     opt = sc.nextInt();
                 }
+                String[] s = new String[100];
                 switch (opt) {
                     case 1:
                         System.out.println(zoomAPI.getChatChannels().listChannels());
                         break;
                     case 2:
+                        System.out.println("enter name,type,member: (e.g. 'new_channel,1,aa@gmail.com')");
+                        if (sc.hasNext()){
+                            s = (sc.next().split(","));
+                        }
+                        System.out.println(zoomAPI.getChatChannels().createChannel(s[0], s[1], s[2]));
                         break;
                     case 3:
+                        System.out.println("enter channel id:");
+                        if (sc.hasNext()){
+                            s = (sc.next().split(","));
+                        }
+                        System.out.println(zoomAPI.getChatChannels().getChannel(s[0]));
                         break;
                     case 4:
+                        System.out.println("enter channel_id,new_channel_name:");
+                        if (sc.hasNext()){
+                            s = (sc.next().split(","));
+                        }
+                        System.out.println(zoomAPI.getChatChannels().updateChannel(s[0], s[1]));
                         break;
                     case 5:
+                        System.out.println("enter channel_id");
+                        if (sc.hasNext()){
+                            s = (sc.next().split(","));
+                        }
+                        System.out.println(zoomAPI.getChatChannels().deleteChannel(s[0]));
                         break;
                     case 6:
+                        System.out.println("enter channel_id");
+                        if (sc.hasNext()){
+                            s = (sc.next().split(","));
+                        }
+                        System.out.println(zoomAPI.getChatChannels().listChannelMembers(s[0]));
                         break;
                     case 7:
+                        System.out.println("enter channel_id, member_email:");
+                        if (sc.hasNext()){
+                            s = (sc.next().split(","));
+                        }
+                        System.out.println(zoomAPI.getChatChannels().listChannelMembers(s[0], s[1]));
                         break;
                     case 8:
+                        System.out.println("enter channel_id:");
+                        if (sc.hasNext()){
+                            s = (sc.next().split(","));
+                        }
+                        System.out.println(zoomAPI.getChatChannels().joinChannel(s[0]));
                         break;
                     case 9:
+                        System.out.println("enter channel_id:");
+                        if (sc.hasNext()){
+                            s = (sc.next().split(","));
+                        }
+                        System.out.println(zoomAPI.getChatChannels().leaveChannel(s[0]));
                         break;
                     case 10:
+                        System.out.println("enter channel_id,member_id");
+                        if (sc.hasNext()){
+                            s = (sc.next().split(","));
+                        }
+                        System.out.println(zoomAPI.getChatChannels().leaveChannel(s[0], s[1]));
                         break;
                     default:
                         break;
@@ -145,27 +191,9 @@ public class botm2 {
 
         }
 
-//        // get channel list pass
-//        s = zoomAPI.getChatChannels().listChannels();
-//        // get a channel pass
-//         s = zoomAPI.getChatChannels().getChannel(my_channel_id);
-//        // create a channel pass
-//        s = zoomAPI.getChatChannels().createChannel("new2", "1", "aa@gmail.com");
-//        // update a channel pass
-//        s = zoomAPI.getChatChannels().updateChannel(my_channel_id, "my_ttest");
-//        // delete a channel pass
-//        s = zoomAPI.getChatChannels().deleteChannel(del_id);
-//        // list channel members pass
-//        s = zoomAPI.getChatChannels().listChannelMembers(test_channel_id);
-//        // invite pass
-//        s = zoomAPI.getChatChannels().inviteMembers(my_channel_id, yl_email);
-//        // join channel pass
-//        s = zoomAPI.getChatChannels().joinChannel(yl_channel_id);
-//        // leave a channel
-//        s = zoomAPI.getChatChannels().leaveChannel(yl_channel_id);
-//        // remove a memeber pass
-//        s = zoomAPI.getChatChannels().removeMember(my_channel_id, yl_member_id);
-//        System.out.println(s);
+
+
+
 //        // List all chat messages
 //        zoomAPI.getChatMessages().listUserChatMessage(yl_channel_id);
 //        // Send a chat message
