@@ -13,7 +13,8 @@ This is a [Zoom APIs](https://marketplace.zoom.us/docs/api-reference/introductio
 This is a class project on [@Crista's](https://github.com/crista) course. Our project has implemented and provided sample codes for all methods in `ChatChannels` and `ChatMessages`. And We have implemented some of APIs in `meeting`, `recording`, `report`, `User` and `Webinar`.
 
 ## Install
-- `git clone` this project and open it as Maven project.
+- Unzip files and switch the directory to the project folder.
+- Run `mvn compile`
 - Download [Ngrok](https://ngrok.com/download).
 
 ## Usage
