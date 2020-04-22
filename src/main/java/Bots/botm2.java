@@ -1,13 +1,12 @@
 package Bots;
 
-import Components.ChatChannels;
-import Components.ChatMessages;
 import Components.ZoomAPI;
-import Utils.AccessLimitService;
 import Utils.OauthClient;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Scanner;
 
 public class botm2 {
     public static void main(String[] args) throws Exception {
@@ -64,63 +63,63 @@ public class botm2 {
                         break;
                     case 2:
                         System.out.println("enter name,type,member: (e.g. 'new_channel,1,aa@gmail.com')");
-                        if (sc.hasNext()){
+                        if (sc.hasNext()) {
                             s = (sc.next().split(","));
                         }
                         System.out.println(zoomAPI.getChatChannels().createChannel(s[0], s[1], s[2]));
                         break;
                     case 3:
                         System.out.println("enter channel id:");
-                        if (sc.hasNext()){
+                        if (sc.hasNext()) {
                             s = (sc.next().split(","));
                         }
                         System.out.println(zoomAPI.getChatChannels().getChannel(s[0]));
                         break;
                     case 4:
                         System.out.println("enter channel_id,new_channel_name:");
-                        if (sc.hasNext()){
+                        if (sc.hasNext()) {
                             s = (sc.next().split(","));
                         }
                         System.out.println(zoomAPI.getChatChannels().updateChannel(s[0], s[1]));
                         break;
                     case 5:
                         System.out.println("enter channel_id");
-                        if (sc.hasNext()){
+                        if (sc.hasNext()) {
                             s = (sc.next().split(","));
                         }
                         System.out.println(zoomAPI.getChatChannels().deleteChannel(s[0]));
                         break;
                     case 6:
                         System.out.println("enter channel_id");
-                        if (sc.hasNext()){
+                        if (sc.hasNext()) {
                             s = (sc.next().split(","));
                         }
                         System.out.println(zoomAPI.getChatChannels().listChannelMembers(s[0]));
                         break;
                     case 7:
                         System.out.println("enter channel_id, member_email:");
-                        if (sc.hasNext()){
+                        if (sc.hasNext()) {
                             s = (sc.next().split(","));
                         }
                         System.out.println(zoomAPI.getChatChannels().listChannelMembers(s[0], s[1]));
                         break;
                     case 8:
                         System.out.println("enter channel_id:");
-                        if (sc.hasNext()){
+                        if (sc.hasNext()) {
                             s = (sc.next().split(","));
                         }
                         System.out.println(zoomAPI.getChatChannels().joinChannel(s[0]));
                         break;
                     case 9:
                         System.out.println("enter channel_id:");
-                        if (sc.hasNext()){
+                        if (sc.hasNext()) {
                             s = (sc.next().split(","));
                         }
                         System.out.println(zoomAPI.getChatChannels().leaveChannel(s[0]));
                         break;
                     case 10:
                         System.out.println("enter channel_id,member_id");
-                        if (sc.hasNext()){
+                        if (sc.hasNext()) {
                             s = (sc.next().split(","));
                         }
                         System.out.println(zoomAPI.getChatChannels().leaveChannel(s[0], s[1]));
@@ -129,7 +128,7 @@ public class botm2 {
                         break;
                 }
 
-            } else if (option == 2){
+            } else if (option == 2) {
                 System.out.println("Current channels are : ");
                 System.out.println(zoomAPI.getChatChannels().listChannels());
                 System.out.println("Choose a function: \n" +
@@ -192,8 +191,6 @@ public class botm2 {
         }
 
 
-
-
 //        // List all chat messages
 //        zoomAPI.getChatMessages().listUserChatMessage(yl_channel_id);
 //        // Send a chat message
@@ -227,6 +224,7 @@ public class botm2 {
 //        queryMap.put("to_channel", yl_channel_id);
 //        zoomAPI.getChatMessages().deleteChatMessage(messageID, queryMap);
     }
+
     private static String getChannelID() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Which channel do you want to test?");
@@ -236,6 +234,7 @@ public class botm2 {
         }
         return channelID;
     }
+
     private static String getNewMessage() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Input your new message: ");
@@ -245,6 +244,7 @@ public class botm2 {
         }
         return newMessage;
     }
+
     private static String getMessageID() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Input message id you want to modify: ");
@@ -254,10 +254,6 @@ public class botm2 {
         }
         return messageID;
     }
-
-
-
-
 
 
 }
