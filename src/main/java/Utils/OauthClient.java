@@ -11,8 +11,6 @@ import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
 import xyz.dmanchon.ngrok.client.NgrokTunnel;
-
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
@@ -22,30 +20,28 @@ import java.util.Scanner;
 
 public class OauthClient implements Auth{
     String token = "";
+    public static String code = "";
     String redirect_url;
     public String getToken(){
         return this.token;
     }
 
     @Override
-    public void authorize() throws OAuthSystemException, IOException, OAuthProblemException {
+    public void authorize() throws OAuthSystemException, IOException, OAuthProblemException, InterruptedException {
         Properties props = new Properties();
         props.load(new java.io.FileInputStream("src/settings.properties"));
         String browser_path = props.getProperty("browser_path");
         String authorize_url = props.getProperty("authorize_url" ) + redirect_url;
-
         List<String> cmd = new ArrayList<String>();
         cmd.add(browser_path);
         cmd.add(authorize_url);
         ProcessBuilder process = new ProcessBuilder(cmd);
         process.start();
-        System.out.println("Input the code: ");
-        String code = "";
-        Scanner scanner = new Scanner(System.in);
-        if (scanner.hasNextLine()) {
-            code = scanner.nextLine();
+        System.out.println("Fetching Codes");
+        while (code.length() < 1) {
+            Thread.sleep(1000);
         }
-
+        System.out.println("Codes Fetched!");
         OAuthClientRequest ClientRequest = OAuthClientRequest
                 .tokenLocation(props.getProperty("token_url"))
                 .setGrantType(GrantType.AUTHORIZATION_CODE)

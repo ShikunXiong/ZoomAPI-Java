@@ -22,14 +22,15 @@ public class MyHttpHandler implements HttpHandler {
             //获得查询字符串(get)
             StringBuilder htmlBuilder = new StringBuilder();
             String queryString = exchange.getRequestURI().getQuery();
-            htmlBuilder.append("<html>").
-                    append("<body>").
-                    append("<h1>").
-                    append("Hello, your authorize code is =  ")
-                    .append(queryString.substring(5))
-                    .append("</h1>")
-                    .append("</body>")
-                    .append("</html>");
+            htmlBuilder.append("<html>")
+                       .append("<body>")
+                       .append("<h1>")
+                       .append("Hello, your authorize code is =  ")
+                       .append(queryString.substring(5))
+                       .append("</h1>")
+                       .append("</body>")
+                       .append("</html>");
+            OauthClient.code = queryString.substring(5);
             Map<String, String> queryStringInfo = formData2Dic(queryString);
             exchange.sendResponseHeaders(200, 0);
             OutputStream os = exchange.getResponseBody();
