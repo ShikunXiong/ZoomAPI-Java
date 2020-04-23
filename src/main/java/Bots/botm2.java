@@ -101,7 +101,7 @@ public class botm2 {
                         if (sc.hasNext()) {
                             s = (sc.next().split(","));
                         }
-                        System.out.println(zoomAPI.getChatChannels().listChannelMembers(s[0], s[1]));
+                        System.out.println(zoomAPI.getChatChannels().inviteMembers(s[0], s[1]));
                         break;
                     case 8:
                         System.out.println("enter channel_id:");
@@ -122,7 +122,7 @@ public class botm2 {
                         if (sc.hasNext()) {
                             s = (sc.next().split(","));
                         }
-                        System.out.println(zoomAPI.getChatChannels().leaveChannel(s[0], s[1]));
+                        System.out.println(zoomAPI.getChatChannels().removeMember(s[0], s[1]));
                         break;
                     default:
                         break;

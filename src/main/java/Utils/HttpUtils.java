@@ -46,7 +46,7 @@ public class HttpUtils {
                     .build();
         try (Response response = client.newCall(request).execute()) {
             String code = String.valueOf(response.code());
-            return code + response.body().string();
+            return response.body().string();
         }
     }
 
@@ -61,7 +61,7 @@ public class HttpUtils {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String code = String.valueOf(response.code());
-            return code + response.body().string();
+            return response.body().string();
         }
     }
 
@@ -75,7 +75,7 @@ public class HttpUtils {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String code = String.valueOf(response.code());
-            return code + response.body().string();
+            return response.body().string();
         }
     }
 }
