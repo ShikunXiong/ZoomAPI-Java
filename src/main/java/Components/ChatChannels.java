@@ -3,8 +3,7 @@ package Components;
 import Utils.HttpUtils;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -101,5 +100,20 @@ public class ChatChannels {
         String url = "/chat/channels/%s/members/%s";
         url = String.format(url, strs[0], strs[1]);
         return this.util.deleteRequest(url, this.token);
+    }
+
+    public String getChannelIdByName(String name) throws IOException {
+        String result = "";
+        String response = this.listChannels();
+        JSONObject jsonObject = JSONObject.parseObject(response);
+        JSONArray array = jsonObject.getJSONArray("channels");
+        for (int i=0; i< array.size(); i++){
+            JSONObject object = (JSONObject)array.get(i);
+            String channel_name = object.getString("name");
+            if (channel_name.equals(name)){
+                return object.getString("id");
+            }
+        }
+        return result;
     }
 }
