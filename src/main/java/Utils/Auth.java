@@ -8,5 +8,5 @@ import java.io.IOException;
 public interface Auth {
     public String Token = "";
     public String getToken();
-    public void authorize() throws OAuthSystemException, IOException, OAuthProblemException;
+    public void authorize() throws OAuthSystemException, IOException, OAuthProblemException, InterruptedException;
 }
