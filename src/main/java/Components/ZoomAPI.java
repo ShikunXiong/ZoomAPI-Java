@@ -1,6 +1,13 @@
 package Components;
 
+import Interface.FetchData;
 import Utils.AccessLimitService;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ZoomAPI {
     private final ChatChannels chatChannels;
@@ -14,27 +21,59 @@ public class ZoomAPI {
     }
 
     public ChatChannels getChatChannels() throws InterruptedException {
-        if (this.accessLimitService.tryAcquire()) {
-            return chatChannels;
-        } else {
-            System.out.println("Visited too frequently, wait for 1s");
-            Thread.sleep(1000);
-            return chatChannels;
-        }
+        this.getAccessLimitService().acquire();
+        System.out.println("Got Permit!");
+        return this.chatChannels;
     }
 
     public ChatMessages getChatMessages() throws InterruptedException {
-        if (this.accessLimitService.tryAcquire()) {
-            return chatMessages;
-        } else {
-            System.out.println("Visited too frequently, wait for 1s");
-            Thread.sleep(1000);
-            return chatMessages;
-        }
+        this.getAccessLimitService().acquire();
+        System.out.println("Got Permit!");
+        return this.chatMessages;
     }
 
     public AccessLimitService getAccessLimitService() {
         return accessLimitService;
+    }
+
+    public String getChannelIdByName(String name) throws IOException, InterruptedException {
+        String result = "";
+        String response = this.getChatChannels().listChannels();
+        JSONObject jsonObject = JSONObject.parseObject(response);
+        JSONArray array = jsonObject.getJSONArray("channels");
+        for (int i=0; i< array.size(); i++){
+            JSONObject object = (JSONObject)array.get(i);
+            String channel_name = object.getString("name");
+            if (channel_name.equals(name)){
+                return object.getString("id");
+            }
+        }
+        return result;
+    }
+
+    public String sendMessage(String channelName, String message) throws IOException, InterruptedException {
+        String channelID = getChannelIdByName(channelName);
+        Map<String, String> bodyMap = new HashMap<>();
+        bodyMap.put("message", message);
+        bodyMap.put("to_channel", channelID);
+        return this.getChatMessages().sendChatMessage(bodyMap);
+    }
+
+    public String listChatHistory(String channelName) throws IOException, InterruptedException {
+        String channelID = getChannelIdByName(channelName);
+        Map<String, String> queryMap = new HashMap<>();
+        queryMap.put("to_channel", channelID);
+        return this.getChatMessages().listUserChatMessage(queryMap);
+    }
+
+    public String search(String channelName, String keyWord, FetchData func) throws IOException, InterruptedException {
+        this.getAccessLimitService().acquire();
+        ChatMessages ChatMessage = this.getChatMessages();
+        String channelID = getChannelIdByName(channelName);
+        Map<String, String> queryMap = new HashMap<>();
+        queryMap.put("to_channel", channelID);
+        HashMap<String, String>[] maps = ChatMessage.listUserChatMessageAll(queryMap);
+        return func.fetchBy(keyWord, maps);
     }
 }
 
