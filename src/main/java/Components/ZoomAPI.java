@@ -78,7 +78,7 @@ public class ZoomAPI {
         return res.toString();
     }
 
-    public String listChatHistoryByDate(String channelName, String startDate, String endDate) throws IOException, InterruptedException {
+    public String listChatHistory(String channelName, String startDate, String endDate) throws IOException, InterruptedException {
         StringBuilder res = new StringBuilder();
         String channelID = getChannelIdByName(channelName);
         LocalDate s = LocalDate.parse(startDate), e = LocalDate.parse(endDate);
