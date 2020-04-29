@@ -9,8 +9,8 @@ public class AccessLimitService {
     public AccessLimitService(double limit) {
         rateLimiter = RateLimiter.create(limit);
     }
-    public boolean tryAcquire(){
-        return rateLimiter.tryAcquire();
+    public void acquire(){
+        rateLimiter.acquire();
     }
 }
 
