@@ -61,9 +61,23 @@ public class ZoomAPI {
 
     public String listChatHistory(String channelName) throws IOException, InterruptedException {
         String channelID = getChannelIdByName(channelName);
+        StringBuilder res = new StringBuilder();
         Map<String, String> queryMap = new HashMap<>();
         queryMap.put("to_channel", channelID);
-        return this.getChatMessages().listUserChatMessage(queryMap);
+        Map<String, String>[] maps = this.getChatMessages().listUserChatMessageAll(queryMap);
+        String nextPageToken = maps[0].get("next_page_token");
+        for (int i = 1; i < maps.length; i++) {
+            res.append(maps[i].get("message"));
+        }
+        while (nextPageToken != null) {
+            queryMap.put("next_page_token", nextPageToken);
+            maps = this.getChatMessages().listUserChatMessageAll(queryMap);
+            nextPageToken = maps[0].get("next_page_token");
+            for (int i = 1; i < maps.length; i++) {
+                res.append(maps[i].get("message"));
+            }
+        }
+        return res.toString();
     }
 
     public String search(String channelName, String keyWord, FetchData func) throws IOException, InterruptedException {
@@ -72,7 +86,7 @@ public class ZoomAPI {
         String channelID = getChannelIdByName(channelName);
         Map<String, String> queryMap = new HashMap<>();
         queryMap.put("to_channel", channelID);
-        HashMap<String, String>[] maps = ChatMessage.listUserChatMessageAll(queryMap);
+        Map<String, String>[] maps = ChatMessage.listUserChatMessageAll(queryMap);
         return func.fetchBy(keyWord, maps);
     }
 }

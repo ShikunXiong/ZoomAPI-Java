@@ -63,7 +63,7 @@ public class ChatMessages {
         return Arrays.toString(ids);
     }
 
-    public HashMap<String, String>[] listUserChatMessageAll(Map<String, String> queryMap) throws IOException {
+    public Map<String, String>[] listUserChatMessageAll(Map<String, String> queryMap) throws IOException {
         String query = Joiner.on("&").withKeyValueSeparator("=").join(queryMap);
         // Build query
         String url = "/chat/users/me/messages?" + query;
@@ -71,10 +71,14 @@ public class ChatMessages {
         String data = this.util.getRequest(url, this.token);
         JSONObject jsonObject = new JSONObject(data);
         JSONArray jsonArray = jsonObject.getJSONArray("messages");
-        HashMap<String, String>[] maps = new HashMap[jsonArray.length()];
-        for (int i = 0; i < jsonArray.length(); i++) {
+        String token = jsonObject.getString("next_page_token");
+        Map<String, String>[] maps = new HashMap[jsonArray.length() + 1];
+        Map<String, String> tokenMap = new HashMap<>();
+        tokenMap.put("next_page_token", token);
+        maps[0] = tokenMap;
+        for (int i = 1; i < jsonArray.length(); i++) {
             JSONObject jo = jsonArray.getJSONObject(i);
-            HashMap<String, String> map = new HashMap<>();
+            Map<String, String> map = new HashMap<>();
             map.put("id", jo.getString("id"));
             map.put("message", jo.getString("message"));
             map.put("sender", jo.getString("sender"));
