@@ -24,13 +24,13 @@ public class ZoomAPI {
 
     public ChatChannels getChatChannels() throws InterruptedException {
         this.getAccessLimitService().acquire();
-        System.out.println("Got Permit!");
+        System.out.println("Getting data...");
         return this.chatChannels;
     }
 
     public ChatMessages getChatMessages() throws InterruptedException {
         this.getAccessLimitService().acquire();
-        System.out.println("Got Permit!");
+        System.out.println("Getting data...");
         return this.chatMessages;
     }
 
