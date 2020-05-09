@@ -1,6 +1,7 @@
 package Components;
 
 import Utils.HttpUtils;
+import com.google.common.base.Joiner;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import com.alibaba.fastjson.*;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChatChannels {
     String token;
@@ -61,9 +63,13 @@ public class ChatChannels {
         return this.util.deleteRequest(url, this.token);
     }
 
-    public String listChannelMembers(String... strs) throws IOException {
+    public String listChannelMembers(String str, Map<String, String> queryMap) throws IOException {
         String url = "/chat/channels/%s/members";
-        url = String.format(url, strs[0]);
+        url = String.format(url, str);
+        if (queryMap!=null) {
+            String query = Joiner.on("&").withKeyValueSeparator("=").join(queryMap);
+            url = url + "?" + query;
+        }
         return this.util.getRequest(url, this.token);
     }
 
@@ -116,4 +122,6 @@ public class ChatChannels {
         }
         return result;
     }
+
+
 }
