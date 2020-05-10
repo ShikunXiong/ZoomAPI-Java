@@ -22,6 +22,11 @@ public class botm4 {
         client.authorize();
         ZoomAPI zoomAPI = new ZoomAPI(client.getToken(), 0.5);
 
+        /**
+         * ChannelName below is for testing use, please change it with
+         * your own channel name
+         * **/
+
         String channelName = "mytest";
 
         NewMessageSubject newMessageSubject = new NewMessageSubject(zoomAPI, channelName);
