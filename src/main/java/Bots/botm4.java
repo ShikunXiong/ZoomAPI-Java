@@ -1,12 +1,17 @@
 package Bots;
 
 import Components.ZoomAPI;
+import EventSubjects.NewMemberSubject;
+import EventSubjects.NewMessageSubject;
+import EventSubjects.UpdateMessageSubject;
+import Observers.NewMemberObserver;
+import Observers.NewMessageObserver;
+import Observers.UpdateMessageObserver;
 import Utils.OauthClient;
 
-
-
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 public class botm4 {
@@ -16,166 +21,67 @@ public class botm4 {
         OauthClient client = new OauthClient();
         client.authorize();
         ZoomAPI zoomAPI = new ZoomAPI(client.getToken(), 0.5);
-        NewMessage newMessage = new NewMessage(zoomAPI, "mytest");
-        UpdateMessage updateMessage = new UpdateMessage(zoomAPI, "mytest");
-        NewMember newMember = new NewMember(zoomAPI, "mytest");
-    }
-}
 
-abstract class ThreadObject extends Thread {
+        String channelName = "mytest";
 
-    public boolean stopMe;
-    public ZoomAPI zoomAPI;
+        NewMessageSubject newMessageSubject = new NewMessageSubject(zoomAPI, channelName);
+        UpdateMessageSubject updateMessageSubject = new UpdateMessageSubject(zoomAPI, channelName);
+        NewMemberSubject newMemberSubject = new NewMemberSubject(zoomAPI, channelName);
 
-    public ThreadObject(ZoomAPI zoomAPI) {
-        super();
-        stopMe = false;
-        this.zoomAPI = zoomAPI;
-        this.start();
-    }
+        NewMessageObserver newMessageObserver = new NewMessageObserver();
+        UpdateMessageObserver updateMessageObserver = new UpdateMessageObserver();
+        NewMemberObserver newMemberObserver = new NewMemberObserver();
 
-    public abstract void run();
-}
+        newMessageSubject.addObserver(newMessageObserver);
+        updateMessageSubject.addObserver(updateMessageObserver);
+        newMemberSubject.addObserver(newMemberObserver);
 
-class NewMessage extends ThreadObject{
-    private String channelName;
-    private List<Map<String, String>> history;
-
-    public NewMessage(ZoomAPI zoomAPI, String channelName) throws IOException, InterruptedException {
-        super(zoomAPI);
-        this.channelName = channelName;
-        history = new ArrayList<>();
-        history = zoomAPI.listChatHistory(channelName);
-    }
-
-    @Override
-    public void run() {
-        while (!this.stopMe){
-        try {
-            List<Map<String, String>> historyCurrent = zoomAPI.listChatHistory(channelName);
-            detect(historyCurrent);
-            history = historyCurrent;
-            Thread.sleep(10000);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }}
-
-    public void detect(List<Map<String, String>> historyCurrent){
-        if (historyCurrent.size()<1 && this.history.size()<1){
-            System.out.println("No new message");
-        }else if(history.size()<1){
-            for (Map<String, String> map : historyCurrent) {
-                System.out.println(map.get("id") + " : " + map.get("message"));
-            }
-        }else {
-            for (int i = 0; i < historyCurrent.size(); i++) {
-                if (historyCurrent.get(i).get("id").equals(history.get(0).get("id"))) {
-                    if (i==0) {
-                        System.out.println("[New Message] No new message");
-                    }
-                    break;
-                }
-                System.out.println("[New Message]" + historyCurrent.get(i).get("id") + " : " + historyCurrent.get(i).get("message"));
-            }
-        }
-    }
-}
-
-class UpdateMessage extends ThreadObject {
-    private String channelName;
-    private List<Map<String, String>> history;
-
-    public UpdateMessage(ZoomAPI zoomAPI, String channelName) throws IOException, InterruptedException {
-        super(zoomAPI);
-        this.channelName = channelName;
-        history = new ArrayList<>();
-        history = zoomAPI.listChatHistory(channelName);
-    }
-
-    @Override
-    public void run() {
-        while (!this.stopMe) {
-            try {
-                List<Map<String, String>> historyCurrent = zoomAPI.listChatHistory(channelName);
-                detect(historyCurrent);
-                history = historyCurrent;
-                Thread.sleep(10000);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    public void detect(List<Map<String, String>> historyCurrent) {
-        int cur = 0;
-        boolean flag = false;
-        for (int i = 0; i < history.size(); i++){
-            String id = history.get(i).get("id");
-            String message = history.get(i).get("message");
-            for (int j = cur; j < historyCurrent.size(); j++) {
-                if (id.equals(historyCurrent.get(j).get("id"))){
-                    if (!message.equals(historyCurrent.get(j).get("message"))){
-                        flag = true;
-                        System.out.println("[Message Update] " + historyCurrent.get(j).get("id") + ":" + historyCurrent.get(j).get("message"));
-                    }
-                    cur = j+1;
-                    break;
+        Thread t1 = new Thread(() -> {
+            while (true){
+                try {
+                    List<Map<String, String>> historyCurrent = zoomAPI.listChatHistory(newMessageSubject.getChannelName());
+                    newMessageSubject.detect(historyCurrent);
+                    newMessageSubject.setHistory(historyCurrent);
+                    Thread.sleep(10000);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
-        }
-        if (!flag){
-            System.out.println("[Message Update] No message update");
-        }
+        });
+        t1.start();
+
+        Thread t2 = new Thread(() -> {
+            while (true) {
+                try {
+                    List<Map<String, String>> historyCurrent = zoomAPI.listChatHistory(updateMessageSubject.getChannelName());
+                    updateMessageSubject.detect(historyCurrent);
+                    updateMessageSubject.setHistory(historyCurrent);
+                    Thread.sleep(10000);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t2.start();
+
+        Thread t3 = new Thread(() -> {
+            while (true) {
+                try {
+                    List<Map<String, String>> current = zoomAPI.getChannelMembers(newMemberSubject.getChannelName());
+                    newMemberSubject.detect(current);
+                    newMemberSubject.setMembers(current);
+                    Thread.sleep(10000);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t3.start();
     }
 }
-
-class NewMember extends ThreadObject {
-    private String channelName;
-    private List<Map<String, String>> members;
-    private Set ids;
-
-    public NewMember(ZoomAPI zoomAPI, String channelName) throws IOException, InterruptedException {
-        super(zoomAPI);
-        this.channelName = channelName;
-        members = new ArrayList<>();
-        members = zoomAPI.getChannelMembers(channelName);
-        ids = new HashSet();
-        for (int i=0; i<members.size(); i++){
-            ids.add(members.get(i).get("id"));
-        }
-    }
-
-        @Override
-    public void run() {
-        while (!this.stopMe) {
-            try {
-                List<Map<String, String>> current = zoomAPI.getChannelMembers(channelName);
-                detect(current);
-                members = current;
-                Thread.sleep(10000);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    public void detect(List<Map<String, String>> current) {
-        boolean flag = false;
-        for (int i=0; i<current.size(); i++){
-            if (!ids.contains(current.get(i).get("id"))){
-                ids.add(current.get(i).get("id"));
-                flag = true;
-                System.out.println("[New member] " + current.get(i).get("name") + " added to this channel");
-            }
-        }
-        if (!flag){
-            System.out.println("[New member] No new member added");
-        }
-    }
-}
-
