@@ -1,12 +1,16 @@
 package models;
 
 import database.annotation.Column;
+import database.annotation.DatabaseTable;
 import database.annotation.PrimaryKey;
+import database.annotation.SearchKey;
 
-public class Channels {
+@DatabaseTable("Channels")
+public class Channel {
 
     @PrimaryKey
-    private String pKey;
+    private long pKey;
+    @SearchKey
     @Column
     private String channelId;
     @Column
@@ -14,17 +18,20 @@ public class Channels {
     @Column
     private int channelType;
 
-    public Channels(String channelId, String channelName, int channelType) {
+    public Channel() {}
+
+    public Channel(long pKey, String channelId, String channelName, int channelType) {
+        this.pKey = pKey;
         this.channelId = channelId;
         this.channelName = channelName;
         this.channelType = channelType;
     }
 
-    public String getpKey() {
+    public long getpKey() {
         return pKey;
     }
 
-    public void setpKey(String pKey) {
+    public void setpKey(long pKey) {
         this.pKey = pKey;
     }
 
@@ -50,5 +57,15 @@ public class Channels {
 
     public void setChannelType(int channelType) {
         this.channelType = channelType;
+    }
+
+    @Override
+    public String toString() {
+        return "Channel{" +
+                "pKey='" + pKey + '\'' +
+                ", channelId='" + channelId + '\'' +
+                ", channelName='" + channelName + '\'' +
+                ", channelType=" + channelType +
+                '}';
     }
 }

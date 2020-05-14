@@ -3,18 +3,20 @@ package models;
 import database.annotation.Column;
 import database.annotation.DatabaseTable;
 import database.annotation.PrimaryKey;
+import database.annotation.SearchKey;
 
 @DatabaseTable("Messages")
-public class Messages {
+public class Message {
 
     @PrimaryKey
     private long pKey;
 
+    @SearchKey
     @Column
     private String messageId;
 
     @Column
-    private String dataTime;
+    private String dateTime;
 
     @Column
     private String message;
@@ -22,9 +24,12 @@ public class Messages {
     @Column
     private int timeStamp;
 
-    public Messages(String messageId, String dataTime, String message, int timeStamp) {
+    public Message() {}
+
+    public Message(long pKey, String messageId, String dateTime, String message, int timeStamp) {
+        this.pKey = pKey;
         this.messageId = messageId;
-        this.dataTime = dataTime;
+        this.dateTime = dateTime;
         this.message = message;
         this.timeStamp = timeStamp;
     }
@@ -46,11 +51,11 @@ public class Messages {
     }
 
     public String getDataTime() {
-        return dataTime;
+        return dateTime;
     }
 
-    public void setDataTime(String dataTime) {
-        this.dataTime = dataTime;
+    public void setDataTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getMessage() {
@@ -67,5 +72,16 @@ public class Messages {
 
     public void setTimeStamp(int timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "pKey=" + pKey +
+                ", messageId='" + messageId + '\'' +
+                ", dateTime='" + dateTime + '\'' +
+                ", message='" + message + '\'' +
+                ", timeStamp=" + timeStamp +
+                '}';
     }
 }

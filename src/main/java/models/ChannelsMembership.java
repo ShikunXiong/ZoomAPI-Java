@@ -8,7 +8,7 @@ import database.annotation.PrimaryKey;
 public class ChannelsMembership {
 
     @PrimaryKey
-    private String pKey;
+    private long pKey;
     @Column
     private String channelId;
     @Column
@@ -22,7 +22,12 @@ public class ChannelsMembership {
     @Column
     private String role;
 
-    public ChannelsMembership(String channelId, String memberId, String email, String firstName, String lastName, String role) {
+    public ChannelsMembership() {
+
+    }
+
+    public ChannelsMembership(long pKey, String channelId, String memberId, String email, String firstName, String lastName, String role) {
+        this.pKey = pKey;
         this.channelId = channelId;
         this.memberId = memberId;
         this.email = email;
@@ -31,11 +36,11 @@ public class ChannelsMembership {
         this.role = role;
     }
 
-    public String getpKey() {
+    public long getpKey() {
         return pKey;
     }
 
-    public void setpKey(String pKey) {
+    public void setpKey(long pKey) {
         this.pKey = pKey;
     }
 
@@ -85,5 +90,18 @@ public class ChannelsMembership {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "ChannelsMembership{" +
+                "pKey='" + pKey + '\'' +
+                ", channelId='" + channelId + '\'' +
+                ", memberId='" + memberId + '\'' +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

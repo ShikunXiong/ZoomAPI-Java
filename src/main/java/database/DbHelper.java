@@ -3,12 +3,11 @@ package database;
 import database.annotation.Column;
 import database.annotation.DatabaseTable;
 import database.annotation.PrimaryKey;
+import database.annotation.SearchKey;
 
 import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
@@ -17,7 +16,7 @@ import java.util.stream.IntStream;
 
 public class DbHelper<T> {
 
-    private Connection con;
+    private final Connection con;
 
     public static <T> DbHelper<T> getConnection() throws SQLException {
         return new DbHelper<T>();
@@ -58,6 +57,48 @@ public class DbHelper<T> {
         }
 
         preparedStatement.executeUpdate();
+    }
+
+    public List<T> read(Class<T> cls) throws SQLException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        List<T> lst = new ArrayList<>();
+        Field[] fields = cls.getDeclaredFields();
+        String sql = "select * from " + cls.getAnnotation(DatabaseTable.class).value();
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()) {
+            T t = cls.getConstructor().newInstance();
+            for (Field f : fields) {
+                f.setAccessible(true);
+                if (f.isAnnotationPresent(PrimaryKey.class)) {
+                    // primary key
+                    f.set(t, rs.getLong(f.getName()));
+                } else if (f.isAnnotationPresent(Column.class)) {
+                    if (f.getType() == int.class) {
+                        f.set(t, rs.getInt(f.getName()));
+                    } else if (f.getType() == String.class) {
+                        f.set(t, rs.getString(f.getName()));
+                    }
+                }
+            }
+            lst.add(t);
+        }
+        return lst;
+    }
+
+    public T read(Class<T> cls, String id) {
+        // id is unique
+        Field[] fields = cls.getDeclaredFields();
+        Field sKey = null;
+        // Find search field
+        for (Field f : fields) {
+            if (f.isAnnotationPresent(SearchKey.class)) {
+                sKey = f;
+                break;
+            }
+        }
+        // Construct SQL
+        String sql ="select * from " + cls.getAnnotation(DatabaseTable.class).value() + " where " +sKey.getName() + " = " + id;
+        return null;
     }
 
 }

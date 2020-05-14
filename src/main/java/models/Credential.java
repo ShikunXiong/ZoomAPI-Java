@@ -3,27 +3,32 @@ package models;
 import database.annotation.Column;
 import database.annotation.DatabaseTable;
 import database.annotation.PrimaryKey;
+import database.annotation.SearchKey;
 
 @DatabaseTable("Credentials")
-public class Credentials {
+public class Credential {
 
     @PrimaryKey
-    private String pKey;
+    private long pKey;
+    @SearchKey
     @Column
     private String clientId;
     @Column
     private String token;
 
-    public Credentials(String clientId, String token) {
+    public Credential() {}
+
+    public Credential(long pKey, String clientId, String token) {
+        this.pKey = pKey;
         this.clientId = clientId;
         this.token = token;
     }
 
-    public String getpKey() {
+    public long getpKey() {
         return pKey;
     }
 
-    public void setpKey(String pKey) {
+    public void setpKey(long pKey) {
         this.pKey = pKey;
     }
 
@@ -41,5 +46,14 @@ public class Credentials {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    @Override
+    public String toString() {
+        return "Credential{" +
+                "pKey='" + pKey + '\'' +
+                ", clientId='" + clientId + '\'' +
+                ", token='" + token + '\'' +
+                '}';
     }
 }
