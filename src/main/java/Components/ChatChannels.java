@@ -3,6 +3,7 @@ package Components;
 import Utils.HttpUtils;
 import database.DbHelper;
 import models.Channel;
+import models.ChannelsMembership;
 import models.Message;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -15,13 +16,15 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ChatChannels {
-    String token;
-    HttpUtils util;
+    private final String token;
+    private final HttpUtils util;
     private final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
     public ChatChannels(String token){
         this.token = token;
         this.util = new HttpUtils();
     }
+
     public String check() throws IOException {
         String url = "/chat/users/me/channels";
         return this.util.getRequest(url, this.token);
@@ -127,13 +130,29 @@ public class ChatChannels {
         return status;
     }
 
-    public String listChannelMembers(String... strs) throws IOException {
+    public String listChannelMembers(String... strs) throws IOException, SQLException {
         String url = "/chat/channels/%s/members";
         url = String.format(url, strs[0]);
-        return this.util.getRequest(url, this.token);
+        String data =  this.util.getRequest(url, this.token);
+        JSONObject jsonObject = JSONObject.parseObject(data);
+        JSONArray array = jsonObject.getJSONArray("members");
+        for (int i=0; i< array.size(); i++){
+            JSONObject jo = (JSONObject)array.get(i);
+            ChannelsMembership c = new ChannelsMembership(0, strs[0], jo.getString("id"), jo.getString("email"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("role"));
+            DbHelper<ChannelsMembership> channelsMembershipDbHelper = null;
+            try {
+                channelsMembershipDbHelper = DbHelper.getConnection();
+                channelsMembershipDbHelper.updateByField(c, "memberId", c.getMemberId());
+            } catch (SQLException | IllegalAccessException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
+                e.printStackTrace();
+            } finally {
+                channelsMembershipDbHelper.closeConnection();
+            }
+        }
+        return data;
     }
 
-    public String inviteMembers(String... strs) throws IOException {
+    public String inviteMembers(String... strs) throws IOException, SQLException {
         String url = "/chat/channels/%s/members";
         url = String.format(url, strs[0]);
         HashMap<String, String> map = new HashMap<>();
@@ -146,26 +165,63 @@ public class ChatChannels {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("members", list);
         RequestBody body = RequestBody.create(JSON, jsonObject.toString());
-        return this.util.postRequest(url, this.token, body);
+        String status =  this.util.postRequest(url, this.token, body);
+        listChannelMembers(strs[0]);
+        return status;
     }
 
-    public String joinChannel(String... strs) throws IOException {
+    public String joinChannel(String... strs) throws IOException, SQLException {
         String url = "/chat/channels/%s/members/me";
         url = String.format(url, strs[0]);
         RequestBody body = RequestBody.create(null, "");
-        return this.util.postRequest(url, this.token, body);
+        String status = this.util.postRequest(url, this.token, body);
+        listChannelMembers(strs[0]);
+        return status;
     }
 
-    public String leaveChannel(String... strs) throws IOException {
+    public String leaveChannel(String... strs) throws IOException, SQLException {
         String url = "/chat/channels/%s/members/me";
         url = String.format(url, strs[0]);
-        return this.util.deleteRequest(url, this.token);
+        String status =  this.util.deleteRequest(url, this.token);
+        if (!status.equals("204")) {
+            System.out.println("Request to leave the channel failed.");
+            return "FAIL";
+        }
+        // Clear channelId members
+        DbHelper<ChannelsMembership> channelsMembershipDbHelper = null;
+        try {
+            channelsMembershipDbHelper = DbHelper.getConnection();
+            channelsMembershipDbHelper.delete(ChannelsMembership.class, "ChannelId", strs[0]);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            channelsMembershipDbHelper.closeConnection();
+        }
+        // Retrieve new members
+        listChannelMembers(strs[0]);
+
+        return status;
     }
 
-    public String removeMember(String... strs) throws IOException {
+    public String removeMember(String... strs) throws IOException, SQLException {
         String url = "/chat/channels/%s/members/%s";
         url = String.format(url, strs[0], strs[1]);
-        return this.util.deleteRequest(url, this.token);
+        String status =  this.util.deleteRequest(url, this.token);
+        if (!status.equals("204")) {
+            System.out.println("Request to leave the channel failed.");
+            return "FAIL";
+        }
+        DbHelper<ChannelsMembership> channelsMembershipDbHelper = null;
+        try {
+            channelsMembershipDbHelper = DbHelper.getConnection();
+            channelsMembershipDbHelper.delete(ChannelsMembership.class, strs[0], "memberId", strs[1]);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            channelsMembershipDbHelper.closeConnection();
+        }
+        return status;
+
     }
 
     public String getChannelIdByName(String name) throws IOException, SQLException {

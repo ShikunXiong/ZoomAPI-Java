@@ -86,7 +86,20 @@ public class DbHelper<T> {
         return getSingleObject(cls, fields, sKey, sql);
     }
 
-    public List<T> read(Class<T> cls, String id) throws SQLException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public T read(Class<T> cls, String searchKey, String fieldName, String fieldValue) throws InvocationTargetException, SQLException, InstantiationException, NoSuchMethodException, IllegalAccessException {
+        Field[] fields = cls.getDeclaredFields();
+        Field sKey = null;
+        for (Field f : fields) {
+            if (f.isAnnotationPresent(SearchKey.class)) {
+                sKey = f;
+                break;
+            }
+        }
+        String sql = "select * from " + cls.getAnnotation(DatabaseTable.class).value() + " where " + sKey.getName() + " = '" + searchKey + "' and " + fieldName + " = '" + fieldValue + "'";
+        return getSingleObject(cls, fields, sKey, sql);
+    }
+
+    public List<T> read(Class<T> cls, String searchKey) throws SQLException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         // read based on search id
         List<T> lst = new ArrayList<>();
         Field[] fields = cls.getDeclaredFields();
@@ -99,7 +112,7 @@ public class DbHelper<T> {
             }
         }
         // Construct SQL
-        String sql ="select * from " + cls.getAnnotation(DatabaseTable.class).value() + " where " + sKey.getName() + " = " + id;
+        String sql ="select * from " + cls.getAnnotation(DatabaseTable.class).value() + " where " + sKey.getName() + " = " + searchKey;
         getAllObjects(cls, lst, fields, sql);
         return lst;
     }
@@ -151,7 +164,35 @@ public class DbHelper<T> {
         }
     }
 
-    public void update(Class<T> cls, String id, String fieldName, String fieldValue) throws SQLException {
+    public void updateByField(T t, String fieldName, String fieldValue) throws IllegalAccessException, SQLException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+        // update data based on search key and field name
+        Class<?> cls = t.getClass();
+        Field[] fields = cls.getDeclaredFields();
+        List<Field> columns = new ArrayList<>();
+        StringJoiner joiner = new StringJoiner(",");
+        String searchKey = null;
+        Field sKey = null;
+        for (Field f : fields) {
+            f.setAccessible(true);
+            if (f.isAnnotationPresent(SearchKey.class)) {
+                sKey = f;
+                searchKey = (String) f.get(t);
+            } else if (f.isAnnotationPresent(Column.class)) {
+                columns.add(f);
+                String s = f.getName() + " = ?";
+                joiner.add(s);
+            }
+        }
+        T data = read((Class<T>) cls, searchKey, fieldName, fieldValue);
+        if (data == null) {
+            write(t);
+        } else {
+            String sql = "update " + cls.getAnnotation(DatabaseTable.class).value() + " set " + joiner.toString() + " where " + sKey.getName() + " = '" + searchKey + "' and " + fieldName + " = '" + fieldValue +"'";
+            generateSQL(t, columns, sql);
+        }
+    }
+
+    public void update(Class<T> cls, String searchKey, String fieldName, String fieldValue) throws SQLException {
         // update based on search key
         Field[] fields = cls.getDeclaredFields();
         Field sKey = null;
@@ -168,7 +209,7 @@ public class DbHelper<T> {
             System.out.println("Field name does not exist.");
             return;
         }
-        String sql = "update " + cls.getAnnotation(DatabaseTable.class).value() + " set " + fieldName + " = '" + fieldValue + "' where " + sKey.getName() + " = '" + id + "'";
+        String sql = "update " + cls.getAnnotation(DatabaseTable.class).value() + " set " + fieldName + " = '" + fieldValue + "' where " + sKey.getName() + " = '" + searchKey + "'";
         PreparedStatement preparedStatement = con.prepareStatement(sql);
         preparedStatement.executeUpdate();
     }
@@ -205,6 +246,28 @@ public class DbHelper<T> {
             return;
         }
         String sql = "delete from " + cls.getAnnotation(DatabaseTable.class).value() + " where " + fieldName + " = '" + fieldValue  + "'";
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        preparedStatement.executeUpdate();
+    }
+
+    public void delete(Class<T> cls, String searchKey, String fieldName, String fieldValue) throws SQLException {
+        // delete based on search key and field name
+        Field[] fields = cls.getDeclaredFields();
+        Field sKey = null;
+        boolean flag = false;
+        for (Field f : fields) {
+            if (f.isAnnotationPresent(SearchKey.class)) {
+                sKey = f;
+            }
+            if (f.getName().equals(fieldName)) {
+                flag = true;
+            }
+        }
+        if (!flag) {
+            System.out.println("Field name does not exist.");
+            return;
+        }
+        String sql = "delete from " + cls.getAnnotation(DatabaseTable.class).value() + " where " + sKey.getName() + " = '" + searchKey + "' and " + fieldName + " = '" + fieldValue + "'";
         PreparedStatement preparedStatement = con.prepareStatement(sql);
         preparedStatement.executeUpdate();
     }
@@ -258,6 +321,10 @@ public class DbHelper<T> {
             sKey.setAccessible(true);
             sKey.set(t, searchKey);
             for (Field f : fields) {
+                if (f.isAnnotationPresent(PrimaryKey.class)) {
+                    f.setAccessible(true);
+                    f.set(t, rs.getLong(f.getName()));
+                }
                 if (f.isAnnotationPresent(Column.class)) {
                     f.setAccessible(true);
                     if (f.getType() == int.class) {

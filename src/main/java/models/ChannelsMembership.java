@@ -3,12 +3,14 @@ package models;
 import database.annotation.Column;
 import database.annotation.DatabaseTable;
 import database.annotation.PrimaryKey;
+import database.annotation.SearchKey;
 
 @DatabaseTable("ChannelsMembership")
 public class ChannelsMembership {
 
     @PrimaryKey
     private long pKey;
+    @SearchKey
     @Column
     private String channelId;
     @Column
