@@ -6,7 +6,7 @@ import database.annotation.PrimaryKey;
 import database.annotation.SearchKey;
 
 @DatabaseTable("Credentials")
-public class Credential {
+public class AccessCredential {
 
     @PrimaryKey
     private long pKey;
@@ -16,9 +16,9 @@ public class Credential {
     @Column
     private String token;
 
-    public Credential() {}
+    public AccessCredential() {}
 
-    public Credential(long pKey, String clientId, String token) {
+    public AccessCredential(long pKey, String clientId, String token) {
         this.pKey = pKey;
         this.clientId = clientId;
         this.token = token;

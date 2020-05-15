@@ -1,5 +1,7 @@
 package Utils;
 
+import Components.ChatMessages;
+import Components.ZoomAPI;
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.auth.oauth2.BearerToken;
 import com.google.api.client.auth.oauth2.ClientParametersAuthentication;
@@ -11,22 +13,34 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.gson.Gson;
 import database.DbHelper;
+import models.AccessCredential;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.*;
 
 public class OauthClient implements Auth {
-    String token = "";
+    private String accessToken = "";
     Credential credential;
 
     public String getToken() {
-        return this.credential.getAccessToken();
+        return getAccessToken();
+    }
+
+    private String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
     @Override
-    public void authorize() throws IOException, SQLException {
+    public void authorize() throws IOException, SQLException, InterruptedException {
         final String SCOPE = "read";
         final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
         JsonFactory JSON_FACTORY = new JacksonFactory();
@@ -38,17 +52,14 @@ public class OauthClient implements Auth {
         final String client_secret = props.getProperty("client_secret");
         final String redirect_url = props.getProperty("redirect_url");
         final int port = Integer.parseInt(props.getProperty("port"));
-//        DbHelper<Credential> credentialDbHelper = null;
-//        try {
-//            credentialDbHelper = DbHelper.getConnection();
-//            Credential c = credentialDbHelper.
-//            if ()
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        } finally {
-//            assert credentialDbHelper != null;
-//            credentialDbHelper.closeConnection();
-//        }
+
+        if (!inValid(client_id)) {
+            // if current token is valid, return.
+            System.out.println("The token is valid!");
+            Thread.sleep(3000);
+            return;
+        }
+        Thread.sleep(3000);
         AuthorizationCodeFlow flow = new AuthorizationCodeFlow.Builder(BearerToken
                 .authorizationHeaderAccessMethod(),
                 HTTP_TRANSPORT,
@@ -63,6 +74,43 @@ public class OauthClient implements Auth {
             LocalServerReceiver receiver = new LocalServerReceiver.Builder().setHost(
                     redirect_url).setPort(port).build();
             credential = new AuthorizationCodeInstalledApp(flow, receiver).authorize("me");
+            String accessToken = credential.getAccessToken();
+            setAccessToken(accessToken);
+            // Update accessToken
+            AccessCredential accessCredential = new AccessCredential(0, client_id, accessToken);
+            DbHelper<AccessCredential> accessCredentialDbHelper = null;
+            try {
+                accessCredentialDbHelper = DbHelper.getConnection();
+                accessCredentialDbHelper.update(accessCredential);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                accessCredentialDbHelper.closeConnection();
+            }
+        }
+
+        private boolean inValid(String clientId) throws SQLException {
+            DbHelper<AccessCredential> accessCredentialDbHelper = null;
+            boolean flag = false;
+            try {
+                accessCredentialDbHelper = DbHelper.getConnection();
+                AccessCredential accessCredential = accessCredentialDbHelper.readBySearchKey(AccessCredential.class, clientId);
+                if (accessCredential == null) flag = true;
+                String token = accessCredential.getToken();
+                ZoomAPI zoomAPI = new ZoomAPI(token, 0.2);
+                String s = zoomAPI.getChatChannels().listChannels();
+                JSONObject jsonObject = new JSONObject(s);
+                HashMap status = new Gson().fromJson(jsonObject.toString(), HashMap.class);
+                if (status.containsKey("code") && (double) status.get("code") == 124) {
+                    flag = true;
+                }
+                setAccessToken(token);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                accessCredentialDbHelper.closeConnection();
+            }
+            return flag;
         }
     }
 

@@ -9,5 +9,5 @@ import java.sql.SQLException;
 public interface Auth {
     public String Token = "";
     public String getToken();
-    public void authorize() throws OAuthSystemException, IOException, OAuthProblemException, SQLException;
+    public void authorize() throws OAuthSystemException, IOException, OAuthProblemException, SQLException, InterruptedException;
 }

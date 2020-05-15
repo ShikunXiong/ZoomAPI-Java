@@ -19,6 +19,8 @@ public class ChatChannels {
     }
     public String listChannels(String... strs) throws IOException {
         String url = "/chat/users/me/channels";
+        System.out.println(token);
+        int i = 1;
         return this.util.getRequest(url, this.token);
     }
 

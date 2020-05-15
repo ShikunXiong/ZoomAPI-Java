@@ -20,23 +20,27 @@ public class botm5 {
         OauthClient client = new OauthClient();
         client.authorize();
 
+        Thread.sleep(3000);
         ZoomAPI zoomAPI = new ZoomAPI(client.getToken(), 0.2);
-//        System.out.println(zoomAPI.listChatHistory("test"));
-//        String newMessage = "This is a new message sent in " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-//        zoomAPI.sendMessage("test", newMessage);
-//        System.out.println(zoomAPI.listChatHistory("test"));
-//        // Update a message
-//        String messageId = "3743feb0-dc2f-4e38-b81f-a47d8b3f38a4";
-//        Map<String, String> bodyMap = new HashMap<>();
-//        bodyMap.put("message", "This is an updated message sent in " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-//        bodyMap.put("to_channel", "c1e85cd0e22844baaaa9cb2bf55f7704");
-//        zoomAPI.getChatMessages().updateChatMessage(messageId, bodyMap);
+        System.out.println(zoomAPI.listChatHistory("test"));
+        String newMessage = "This is a new message sent in " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        Map<String, String> bodyMap2 = new HashMap<>();
+        bodyMap2.put("message", newMessage);
+        bodyMap2.put("to_channel", "c1e85cd0e22844baaaa9cb2bf55f7704");
+        zoomAPI.getChatMessages().sendChatMessage(bodyMap2);
+        System.out.println(zoomAPI.listChatHistory("test"));
+        // Update a message
+        String messageId = "3743feb0-dc2f-4e38-b81f-a47d8b3f38a4";
+        Map<String, String> bodyMap = new HashMap<>();
+        bodyMap.put("message", "This is an updated message sent in " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        bodyMap.put("to_channel", "c1e85cd0e22844baaaa9cb2bf55f7704");
+        zoomAPI.getChatMessages().updateChatMessage(messageId, bodyMap);
 
         // delete a user
-        String messageId = "3743feb0-dc2f-4e38-b81f-a47d8b3f38a4";
+        String messageId2 = "2d4a7ed4-a686-4cfa-bec5-ac19805a3959";
         Map<String, String> queryMap = new HashMap<>();
         queryMap.put("to_channel", "c1e85cd0e22844baaaa9cb2bf55f7704");
-        zoomAPI.getChatMessages().deleteChatMessage(messageId, queryMap);
+        zoomAPI.getChatMessages().deleteChatMessage(messageId2, queryMap);
 
     }
 }

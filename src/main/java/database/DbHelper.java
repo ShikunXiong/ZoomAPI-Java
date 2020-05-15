@@ -21,6 +21,7 @@ public class DbHelper<T> {
     public static <T> DbHelper<T> getConnection() throws SQLException {
         return new DbHelper<T>();
     }
+
     private DbHelper() throws SQLException {
         this.con =DriverManager.getConnection("jdbc:h2:C:\\Users\\dlwan\\Documents\\Study\\2020SQ\\SWE262P\\ZoomAPI-Java\\src\\db\\zoom", "admin", "123");
     }

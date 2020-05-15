@@ -1,6 +1,4 @@
 package database;
-
-import models.Credential;
 import models.Message;
 
 import java.lang.reflect.InvocationTargetException;
