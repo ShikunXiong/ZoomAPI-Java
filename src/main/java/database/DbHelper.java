@@ -45,6 +45,176 @@ public class DbHelper<T> {
         int number = columns.size();
         String qMarks = IntStream.range(0, number).mapToObj(e -> "?").collect(Collectors.joining(","));
         String sql = "insert into " + cls.getAnnotation(DatabaseTable.class).value() + "( " + pKey.getName() + "," + joiner.toString() + ") " + "values ( default, " + qMarks + ")";
+        generateSQL(t, columns, sql);
+    }
+
+    public List<T> read(Class<T> cls) throws SQLException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        List<T> lst = new ArrayList<>();
+        Field[] fields = cls.getDeclaredFields();
+        String sql = "select * from " + cls.getAnnotation(DatabaseTable.class).value();
+        getObject(cls, lst, fields, sql);
+        return lst;
+    }
+
+    public T read(Class<T> cls, long primaryKey) throws SQLException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        // read based on primary key
+        Field[] fields = cls.getDeclaredFields();
+        Field pKey = null;
+        for (Field f : fields) {
+            if (f.isAnnotationPresent(PrimaryKey.class)) {
+                pKey = f;
+                break;
+            }
+        }
+        String sql = "select * from " + cls.getAnnotation(DatabaseTable.class).value() + " where " + pKey.getName() + " = " + primaryKey;
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        ResultSet rs = preparedStatement.executeQuery();
+        if (rs.next()) {
+            T t = cls.getConstructor().newInstance();
+            long transactionId = rs.getInt(pKey.getName());
+            pKey.setAccessible(true);
+            pKey.set(t, transactionId);
+            for (Field f : fields) {
+                if (f.isAnnotationPresent(Column.class)) {
+                    f.setAccessible(true);
+                    if (f.getType() == int.class) {
+                        f.set(t, rs.getInt(f.getName()));
+                    } else if (f.getType() == String.class) {
+                        f.set(t, rs.getString(f.getName()));
+                    }
+                }
+            }
+            return t;
+        } else {
+            System.out.println("This primary key does not exist, return NULL");
+            return null;
+        }
+    }
+
+    public List<T> read(Class<T> cls, String id) throws SQLException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        // read based on search id
+        List<T> lst = new ArrayList<>();
+        Field[] fields = cls.getDeclaredFields();
+        Field sKey = null;
+        // Find search field
+        for (Field f : fields) {
+            if (f.isAnnotationPresent(SearchKey.class)) {
+                sKey = f;
+                break;
+            }
+        }
+        // Construct SQL
+        String sql ="select * from " + cls.getAnnotation(DatabaseTable.class).value() + " where " + sKey.getName() + " = " + id;
+        getObject(cls, lst, fields, sql);
+        return lst;
+    }
+
+    public List<T> read(Class<T> cls, String fieldName, String fieldValue) throws InvocationTargetException, SQLException, InstantiationException, NoSuchMethodException, IllegalAccessException {
+        List<T> lst = new ArrayList<>();
+        Field[] fields = cls.getDeclaredFields();
+        boolean flag = false;
+        for (Field f : fields) {
+            if (f.getName().equals(fieldName)) {
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            System.out.println("Field name does not exist.");
+            return null;
+        }
+        String sql ="select * from " + cls.getAnnotation(DatabaseTable.class).value() + " where " + fieldName + " = " + fieldValue;
+        getObject(cls, lst, fields, sql);
+        return lst;
+    }
+
+    public void update(T t) throws IllegalAccessException, InvocationTargetException, SQLException, InstantiationException, NoSuchMethodException {
+        // update all information based on primary key
+        Class<?> cls = t.getClass();
+        Field[] fields = cls.getDeclaredFields();
+        List<Field> columns = new ArrayList<>();
+        StringJoiner joiner = new StringJoiner(",");
+        long primaryKey = 0;
+        Field pKey = null;
+        for (Field f : fields) {
+            f.setAccessible(true);
+            if (f.isAnnotationPresent(PrimaryKey.class)) {
+                pKey = f;
+                primaryKey = f.getLong(t);
+            } else if (f.isAnnotationPresent(Column.class)) {
+                columns.add(f);
+                String s = f.getName() + " = ?";
+                joiner.add(s);
+            }
+        }
+        T data = read((Class<T>) cls, primaryKey);
+        if (data == null) {
+            write(t);
+        } else {
+            String sql = "update " + cls.getAnnotation(DatabaseTable.class).value() + " set " + joiner.toString() + " where " + pKey.getName() + " = " + primaryKey;
+            generateSQL(t, columns, sql);
+        }
+    }
+
+    public void update(Class<T> cls, String id, String fieldName, String fieldValue) throws SQLException {
+        // update based on search key
+        Field[] fields = cls.getDeclaredFields();
+        Field sKey = null;
+        boolean flag = false;
+        for (Field f : fields) {
+            if (f.isAnnotationPresent(SearchKey.class)) {
+                sKey = f;
+            }
+            if (f.getName().equals(fieldName)) {
+                flag = true;
+            }
+        }
+        if (!flag) {
+            System.out.println("Field name does not exist.");
+            return;
+        }
+        String sql = "update " + cls.getAnnotation(DatabaseTable.class).value() + " set " + fieldName + " = '" + fieldValue + "' where " + sKey.getName() + " = '" + id + "'";
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        preparedStatement.executeUpdate();
+    }
+
+    public void delete(T t) throws IllegalAccessException, SQLException {
+        Class<?> cls = t.getClass();
+        Field[] fields = cls.getDeclaredFields();
+        long primaryKey = 0;
+        Field pKey = null;
+        for (Field f : fields) {
+            f.setAccessible(true);
+            if (f.isAnnotationPresent(PrimaryKey.class)) {
+                pKey = f;
+                primaryKey = f.getLong(t);
+            }
+        }
+        String sql = "delete from " + cls.getAnnotation(DatabaseTable.class).value() + " where " + pKey.getName() + " = " + primaryKey;
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        preparedStatement.executeUpdate();
+    }
+
+    public void delete(Class<T> cls, String fieldName, String fieldValue) throws SQLException {
+        // delete based on field name and value
+        Field[] fields = cls.getDeclaredFields();
+        boolean flag = false;
+        for (Field f : fields) {
+            if (f.getName().equals(fieldName)) {
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            System.out.println("Field name does not exist.");
+            return;
+        }
+        String sql = "delete from " + cls.getAnnotation(DatabaseTable.class).value() + " where " + fieldName + " = '" + fieldValue  + "'";
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        preparedStatement.executeUpdate();
+    }
+
+    private void generateSQL(T t, List<Field> columns, String sql) throws SQLException, IllegalAccessException {
         PreparedStatement preparedStatement = con.prepareStatement(sql);
         int index = 1;
         for (Field f : columns) {
@@ -55,14 +225,10 @@ public class DbHelper<T> {
                 preparedStatement.setString(index++, (String) f.get(t));
             }
         }
-
         preparedStatement.executeUpdate();
     }
 
-    public List<T> read(Class<T> cls) throws SQLException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        List<T> lst = new ArrayList<>();
-        Field[] fields = cls.getDeclaredFields();
-        String sql = "select * from " + cls.getAnnotation(DatabaseTable.class).value();
+    private void getObject(Class<T> cls, List<T> lst, Field[] fields, String sql) throws SQLException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         PreparedStatement preparedStatement = con.prepareStatement(sql);
         ResultSet rs = preparedStatement.executeQuery();
         while (rs.next()) {
@@ -82,23 +248,10 @@ public class DbHelper<T> {
             }
             lst.add(t);
         }
-        return lst;
     }
 
-    public T read(Class<T> cls, String id) {
-        // id is unique
-        Field[] fields = cls.getDeclaredFields();
-        Field sKey = null;
-        // Find search field
-        for (Field f : fields) {
-            if (f.isAnnotationPresent(SearchKey.class)) {
-                sKey = f;
-                break;
-            }
-        }
-        // Construct SQL
-        String sql ="select * from " + cls.getAnnotation(DatabaseTable.class).value() + " where " +sKey.getName() + " = " + id;
-        return null;
+    public void closeConnection() throws SQLException {
+        this.con.close();
     }
 
 }
