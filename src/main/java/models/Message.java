@@ -16,6 +16,9 @@ public class Message {
     private String messageId;
 
     @Column
+    private String sender;
+
+    @Column
     private String dateTime;
 
     @Column
@@ -24,14 +27,27 @@ public class Message {
     @Column
     private int timeStamp;
 
+    @Column
+    private String channelId;
+
     public Message() {}
 
-    public Message(long pKey, String messageId, String dateTime, String message, int timeStamp) {
+    public Message(long pKey, String messageId, String message, String sender, String dateTime, int timeStamp, String channelId) {
         this.pKey = pKey;
         this.messageId = messageId;
-        this.dateTime = dateTime;
         this.message = message;
+        this.sender = sender;
+        this.dateTime = dateTime;
         this.timeStamp = timeStamp;
+        this.channelId = channelId;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
     public long getpKey() {
@@ -50,11 +66,11 @@ public class Message {
         this.messageId = messageId;
     }
 
-    public String getDataTime() {
+    public String getDateTime() {
         return dateTime;
     }
 
-    public void setDataTime(String dateTime) {
+    public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -74,14 +90,24 @@ public class Message {
         this.timeStamp = timeStamp;
     }
 
+    public String getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
+    }
+
     @Override
     public String toString() {
         return "Message{" +
                 "pKey=" + pKey +
                 ", messageId='" + messageId + '\'' +
+                ", sender='" + sender + '\'' +
                 ", dateTime='" + dateTime + '\'' +
                 ", message='" + message + '\'' +
                 ", timeStamp=" + timeStamp +
+                ", channelId='" + channelId + '\'' +
                 '}';
     }
 }

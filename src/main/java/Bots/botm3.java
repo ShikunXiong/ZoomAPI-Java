@@ -19,9 +19,9 @@ public class botm3 {
         client.authorize();
 
         ZoomAPI zoomAPI = new ZoomAPI(client.getToken(), 1);
-//        String newMessage = "This is a new message sent in " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-//        zoomAPI.sendMessage("test", newMessage);
-        System.out.println(zoomAPI.listChatHistory("test", "2020-04-24", "2020-04-29"));
+        String newMessage = "This is a new message sent in " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        zoomAPI.sendMessage("test", newMessage);
+        System.out.println(zoomAPI.listChatHistory("test"));
 
 //        FetchData fetchByMessage =  (s, maps) -> {
 //            StringBuilder sb = new StringBuilder();

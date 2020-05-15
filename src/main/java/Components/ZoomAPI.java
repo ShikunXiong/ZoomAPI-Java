@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,7 +54,7 @@ public class ZoomAPI {
         return result;
     }
 
-    public String sendMessage(String channelName, String message) throws IOException, InterruptedException {
+    public String sendMessage(String channelName, String message) throws IOException, InterruptedException, SQLException {
         String channelID = getChannelIdByName(channelName);
         Map<String, String> bodyMap = new HashMap<>();
         bodyMap.put("message", message);
@@ -61,7 +62,7 @@ public class ZoomAPI {
         return this.getChatMessages().sendChatMessage(bodyMap);
     }
 
-    public String listChatHistory(String channelName) throws IOException, InterruptedException {
+    public String listChatHistory(String channelName) throws IOException, InterruptedException, SQLException {
         String channelID = getChannelIdByName(channelName);
         StringBuilder res = new StringBuilder();
         String nextPageToken = "";
@@ -78,7 +79,7 @@ public class ZoomAPI {
         return res.toString();
     }
 
-    public String listChatHistory(String channelName, String startDate, String endDate) throws IOException, InterruptedException {
+    public String listChatHistory(String channelName, String startDate, String endDate) throws IOException, InterruptedException, SQLException {
         StringBuilder res = new StringBuilder();
         String channelID = getChannelIdByName(channelName);
         LocalDate s = LocalDate.parse(startDate), e = LocalDate.parse(endDate);
@@ -102,7 +103,7 @@ public class ZoomAPI {
         return res.toString();
     }
 
-    public String search(String channelName, String keyWord, FetchData func) throws IOException, InterruptedException {
+    public String search(String channelName, String keyWord, FetchData func) throws IOException, InterruptedException, SQLException {
         this.getAccessLimitService().acquire();
         ChatMessages ChatMessage = this.getChatMessages();
         String channelID = getChannelIdByName(channelName);

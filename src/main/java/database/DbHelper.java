@@ -52,7 +52,7 @@ public class DbHelper<T> {
         List<T> lst = new ArrayList<>();
         Field[] fields = cls.getDeclaredFields();
         String sql = "select * from " + cls.getAnnotation(DatabaseTable.class).value();
-        getObject(cls, lst, fields, sql);
+        getAllObjects(cls, lst, fields, sql);
         return lst;
     }
 
@@ -67,28 +67,23 @@ public class DbHelper<T> {
             }
         }
         String sql = "select * from " + cls.getAnnotation(DatabaseTable.class).value() + " where " + pKey.getName() + " = " + primaryKey;
-        PreparedStatement preparedStatement = con.prepareStatement(sql);
-        ResultSet rs = preparedStatement.executeQuery();
-        if (rs.next()) {
-            T t = cls.getConstructor().newInstance();
-            long transactionId = rs.getInt(pKey.getName());
-            pKey.setAccessible(true);
-            pKey.set(t, transactionId);
-            for (Field f : fields) {
-                if (f.isAnnotationPresent(Column.class)) {
-                    f.setAccessible(true);
-                    if (f.getType() == int.class) {
-                        f.set(t, rs.getInt(f.getName()));
-                    } else if (f.getType() == String.class) {
-                        f.set(t, rs.getString(f.getName()));
-                    }
-                }
+        return getSingleObject(cls, fields, pKey, sql);
+    }
+    
+    public T readBySearchKey(Class<T> cls, String searchKey) throws SQLException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, InstantiationException {
+        // read based on search id when returned type is definitely 1
+        Field[] fields = cls.getDeclaredFields();
+        Field sKey = null;
+        // Find search field
+        for (Field f : fields) {
+            if (f.isAnnotationPresent(SearchKey.class)) {
+                sKey = f;
+                break;
             }
-            return t;
-        } else {
-            System.out.println("This primary key does not exist, return NULL");
-            return null;
         }
+        // Construct SQL
+        String sql ="select * from " + cls.getAnnotation(DatabaseTable.class).value() + " where " + sKey.getName() + " = '" + searchKey + "'";
+        return getSingleObject(cls, fields, sKey, sql);
     }
 
     public List<T> read(Class<T> cls, String id) throws SQLException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -105,7 +100,7 @@ public class DbHelper<T> {
         }
         // Construct SQL
         String sql ="select * from " + cls.getAnnotation(DatabaseTable.class).value() + " where " + sKey.getName() + " = " + id;
-        getObject(cls, lst, fields, sql);
+        getAllObjects(cls, lst, fields, sql);
         return lst;
     }
 
@@ -123,8 +118,8 @@ public class DbHelper<T> {
             System.out.println("Field name does not exist.");
             return null;
         }
-        String sql ="select * from " + cls.getAnnotation(DatabaseTable.class).value() + " where " + fieldName + " = " + fieldValue;
-        getObject(cls, lst, fields, sql);
+        String sql ="select * from " + cls.getAnnotation(DatabaseTable.class).value() + " where " + fieldName + " = '" + fieldValue + "'";
+        getAllObjects(cls, lst, fields, sql);
         return lst;
     }
 
@@ -134,24 +129,24 @@ public class DbHelper<T> {
         Field[] fields = cls.getDeclaredFields();
         List<Field> columns = new ArrayList<>();
         StringJoiner joiner = new StringJoiner(",");
-        long primaryKey = 0;
-        Field pKey = null;
+        String searchKey = null;
+        Field sKey = null;
         for (Field f : fields) {
             f.setAccessible(true);
-            if (f.isAnnotationPresent(PrimaryKey.class)) {
-                pKey = f;
-                primaryKey = f.getLong(t);
+            if (f.isAnnotationPresent(SearchKey.class)) {
+                sKey = f;
+                searchKey = (String) f.get(t);
             } else if (f.isAnnotationPresent(Column.class)) {
                 columns.add(f);
                 String s = f.getName() + " = ?";
                 joiner.add(s);
             }
         }
-        T data = read((Class<T>) cls, primaryKey);
+        T data = readBySearchKey((Class<T>) cls, searchKey);
         if (data == null) {
             write(t);
         } else {
-            String sql = "update " + cls.getAnnotation(DatabaseTable.class).value() + " set " + joiner.toString() + " where " + pKey.getName() + " = " + primaryKey;
+            String sql = "update " + cls.getAnnotation(DatabaseTable.class).value() + " set " + joiner.toString() + " where " + sKey.getName() + " = '" + searchKey + "'";
             generateSQL(t, columns, sql);
         }
     }
@@ -228,7 +223,7 @@ public class DbHelper<T> {
         preparedStatement.executeUpdate();
     }
 
-    private void getObject(Class<T> cls, List<T> lst, Field[] fields, String sql) throws SQLException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+    private void getAllObjects(Class<T> cls, List<T> lst, Field[] fields, String sql) throws SQLException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         PreparedStatement preparedStatement = con.prepareStatement(sql);
         ResultSet rs = preparedStatement.executeQuery();
         while (rs.next()) {
@@ -252,6 +247,31 @@ public class DbHelper<T> {
 
     public void closeConnection() throws SQLException {
         this.con.close();
+    }
+
+    private T getSingleObject(Class<T> cls, Field[] fields, Field sKey, String sql) throws SQLException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        ResultSet rs = preparedStatement.executeQuery();
+        if (rs.next()) {
+            T t = cls.getConstructor().newInstance();
+            String searchKey = rs.getString(sKey.getName());
+            sKey.setAccessible(true);
+            sKey.set(t, searchKey);
+            for (Field f : fields) {
+                if (f.isAnnotationPresent(Column.class)) {
+                    f.setAccessible(true);
+                    if (f.getType() == int.class) {
+                        f.set(t, rs.getInt(f.getName()));
+                    } else if (f.getType() == String.class) {
+                        f.set(t, rs.getString(f.getName()));
+                    }
+                }
+            }
+            return t;
+        } else {
+            System.out.println("This primary key does not exist, return NULL");
+            return null;
+        }
     }
 
 }

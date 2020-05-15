@@ -11,8 +11,10 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import database.DbHelper;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.*;
 
 public class OauthClient implements Auth {
@@ -24,7 +26,7 @@ public class OauthClient implements Auth {
     }
 
     @Override
-    public void authorize() throws IOException {
+    public void authorize() throws IOException, SQLException {
         final String SCOPE = "read";
         final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
         JsonFactory JSON_FACTORY = new JacksonFactory();
@@ -36,6 +38,17 @@ public class OauthClient implements Auth {
         final String client_secret = props.getProperty("client_secret");
         final String redirect_url = props.getProperty("redirect_url");
         final int port = Integer.parseInt(props.getProperty("port"));
+//        DbHelper<Credential> credentialDbHelper = null;
+//        try {
+//            credentialDbHelper = DbHelper.getConnection();
+//            Credential c = credentialDbHelper.
+//            if ()
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        } finally {
+//            assert credentialDbHelper != null;
+//            credentialDbHelper.closeConnection();
+//        }
         AuthorizationCodeFlow flow = new AuthorizationCodeFlow.Builder(BearerToken
                 .authorizationHeaderAccessMethod(),
                 HTTP_TRANSPORT,
