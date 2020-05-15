@@ -14,15 +14,18 @@ public class Channel {
     @Column
     private String channelId;
     @Column
+    private String channelJId;
+    @Column
     private String channelName;
     @Column
     private int channelType;
 
     public Channel() {}
 
-    public Channel(long pKey, String channelId, String channelName, int channelType) {
+    public Channel(long pKey, String channelId, String channelJId, String channelName, int channelType) {
         this.pKey = pKey;
         this.channelId = channelId;
+        this.channelJId = channelJId;
         this.channelName = channelName;
         this.channelType = channelType;
     }
@@ -41,6 +44,14 @@ public class Channel {
 
     public void setChannelId(String channelId) {
         this.channelId = channelId;
+    }
+
+    public String getChannelJId() {
+        return channelJId;
+    }
+
+    public void setChannelJId(String channelJId) {
+        this.channelJId = channelJId;
     }
 
     public String getChannelName() {
@@ -62,8 +73,9 @@ public class Channel {
     @Override
     public String toString() {
         return "Channel{" +
-                "pKey='" + pKey + '\'' +
+                "pKey=" + pKey +
                 ", channelId='" + channelId + '\'' +
+                ", channelJId='" + channelJId + '\'' +
                 ", channelName='" + channelName + '\'' +
                 ", channelType=" + channelType +
                 '}';

@@ -1,5 +1,4 @@
 package models;
-
 import database.annotation.Column;
 import database.annotation.DatabaseTable;
 import database.annotation.PrimaryKey;

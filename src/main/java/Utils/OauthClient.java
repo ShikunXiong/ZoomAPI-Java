@@ -55,7 +55,7 @@ public class OauthClient implements Auth {
 
         if (!inValid(client_id)) {
             // if current token is valid, return.
-            System.out.println("The token is valid!");
+            System.out.println("--- Stored token is valid! ---");
             Thread.sleep(3000);
             return;
         }
@@ -70,38 +70,43 @@ public class OauthClient implements Auth {
                 client_id,
                 AUTHORIZATION_SERVER_URL).setScopes(Arrays.asList(SCOPE))
                 .build();
-            // authorize
-            LocalServerReceiver receiver = new LocalServerReceiver.Builder().setHost(
-                    redirect_url).setPort(port).build();
-            credential = new AuthorizationCodeInstalledApp(flow, receiver).authorize("me");
-            String accessToken = credential.getAccessToken();
-            setAccessToken(accessToken);
-            // Update accessToken
-            AccessCredential accessCredential = new AccessCredential(0, client_id, accessToken);
-            DbHelper<AccessCredential> accessCredentialDbHelper = null;
-            try {
-                accessCredentialDbHelper = DbHelper.getConnection();
-                accessCredentialDbHelper.update(accessCredential);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                accessCredentialDbHelper.closeConnection();
-            }
+        // authorize
+        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setHost(redirect_url).setPort(port).build();
+        credential = new AuthorizationCodeInstalledApp(flow, receiver).authorize("me");
+        String accessToken = credential.getAccessToken();
+        System.out.println("--- New token is stored in the database ---");
+        setAccessToken(accessToken);
+        // Update accessToken
+        AccessCredential accessCredential = new AccessCredential(0, client_id, accessToken);
+        DbHelper<AccessCredential> accessCredentialDbHelper = null;
+        try {
+            accessCredentialDbHelper = DbHelper.getConnection();
+            accessCredentialDbHelper.update(accessCredential);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            accessCredentialDbHelper.closeConnection();
         }
+    }
 
         private boolean inValid(String clientId) throws SQLException {
+            System.out.println("--- Checking stored token ---");
             DbHelper<AccessCredential> accessCredentialDbHelper = null;
             boolean flag = false;
             try {
                 accessCredentialDbHelper = DbHelper.getConnection();
                 AccessCredential accessCredential = accessCredentialDbHelper.readBySearchKey(AccessCredential.class, clientId);
-                if (accessCredential == null) flag = true;
+                if (accessCredential == null) {
+                    System.out.println("--- No stored token, fetching new token ---");
+                    flag = true;
+                }
                 String token = accessCredential.getToken();
                 ZoomAPI zoomAPI = new ZoomAPI(token, 0.2);
-                String s = zoomAPI.getChatChannels().listChannels();
+                String s = zoomAPI.getChatChannels().check();
                 JSONObject jsonObject = new JSONObject(s);
                 HashMap status = new Gson().fromJson(jsonObject.toString(), HashMap.class);
                 if (status.containsKey("code") && (double) status.get("code") == 124) {
+                    System.out.println("--- stored token expires, fetching new token ---");
                     flag = true;
                 }
                 setAccessToken(token);

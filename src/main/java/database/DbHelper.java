@@ -4,7 +4,6 @@ import database.annotation.Column;
 import database.annotation.DatabaseTable;
 import database.annotation.PrimaryKey;
 import database.annotation.SearchKey;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;

@@ -39,7 +39,7 @@ public class ZoomAPI {
         return accessLimitService;
     }
 
-    public String getChannelIdByName(String name) throws IOException, InterruptedException {
+    public String getChannelIdByName(String name) throws IOException, InterruptedException, SQLException {
         String result = "";
         String response = this.getChatChannels().listChannels();
         JSONObject jsonObject = JSONObject.parseObject(response);
