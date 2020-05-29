@@ -27,6 +27,9 @@ public class botm3 {
             StringBuilder sb = new StringBuilder();
             sb.append("Messages contains \"").append(s).append("\" are :\n");
             for (Map<String, String> map : maps) {
+                if (!map.containsKey("message")){
+                    continue;
+                }
                 if (map.get("message").contains(s)) {
                     sb.append(map.get("message")).append(' ');
                 }
@@ -38,6 +41,9 @@ public class botm3 {
             StringBuilder sb = new StringBuilder();
             sb.append("Messages sent by \"").append(s).append("\" are :\n");
             for (Map<String, String> map : maps) {
+                if (!map.containsKey("sender")){
+                    continue;
+                }
                 if (map.get("sender").contains(s)) {
                     sb.append(map.get("message")).append(' ');
                 }
@@ -45,9 +51,9 @@ public class botm3 {
             return sb.toString();
         };
 
-        System.out.println(zoomAPI.search("mytest", "sent", fetchByMessage));
+//        System.out.println(zoomAPI.search("mytest", "sent", fetchByMessage));
 //        Thread.sleep(1000);
-//        System.out.println(zoomAPI.search("mytest", "Shikun", fetchBySender));
+        System.out.println(zoomAPI.search("mytest", "xsk", fetchBySender));
 
     }
 }
