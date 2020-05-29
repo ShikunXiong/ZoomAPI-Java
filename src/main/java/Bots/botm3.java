@@ -23,31 +23,31 @@ public class botm3 {
         zoomAPI.sendMessage("test", newMessage);
         System.out.println(zoomAPI.listChatHistory("test"));
 
-//        FetchData fetchByMessage =  (s, maps) -> {
-//            StringBuilder sb = new StringBuilder();
-//            sb.append("Messages contains \"").append(s).append("\" are :\n");
-//            for (Map<String, String> map : maps) {
-//                if (map.get("message").contains(s)) {
-//                    sb.append(map.get("message")).append(' ');
-//                }
-//            }
-//            return sb.toString();
-//        };
-//
-//        FetchData fetchBySender =  (s,maps) -> {
-//            StringBuilder sb = new StringBuilder();
-//            sb.append("Messages sent by \"").append(s).append("\" are :\n");
-//            for (Map<String, String> map : maps) {
-//                if (map.get("sender").contains(s)) {
-//                    sb.append(map.get("message")).append(' ');
-//                }
-//            }
-//            return sb.toString();
-//        };
-//
-//        System.out.println(zoomAPI.search("test", "sent", fetchByMessage));
-//        // Thread.sleep(1000);
-//        System.out.println(zoomAPI.search("test", "wangyilin", fetchBySender));
+        FetchData fetchByMessage =  (s, maps) -> {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Messages contains \"").append(s).append("\" are :\n");
+            for (Map<String, String> map : maps) {
+                if (map.get("message").contains(s)) {
+                    sb.append(map.get("message")).append(' ');
+                }
+            }
+            return sb.toString();
+        };
+
+        FetchData fetchBySender =  (s,maps) -> {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Messages sent by \"").append(s).append("\" are :\n");
+            for (Map<String, String> map : maps) {
+                if (map.get("sender").contains(s)) {
+                    sb.append(map.get("message")).append(' ');
+                }
+            }
+            return sb.toString();
+        };
+
+        System.out.println(zoomAPI.search("test", "sent", fetchByMessage));
+        // Thread.sleep(1000);
+        System.out.println(zoomAPI.search("test", "wangyilin", fetchBySender));
 
     }
 }

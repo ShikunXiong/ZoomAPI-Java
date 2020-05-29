@@ -1,0 +1,930 @@
+2020-05-13 22:55:33 database: wrong user or password; user: "ADMIN"
+org.h2.message.DbException: Wrong user name or password [28000-200]
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.engine.Engine.openSession(Engine.java:131)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:309)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:289)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:785)
+	at org.h2.server.web.WebApp.login(WebApp.java:1008)
+	at org.h2.server.web.WebApp.process(WebApp.java:223)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:173)
+	at org.h2.server.web.WebThread.process(WebThread.java:139)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name or password [28000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:461)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 21 more
+2020-05-14 06:01:30 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:481)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:402)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:3579)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:170)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:103)
+	at org.h2.engine.Database.getPageStore(Database.java:2659)
+	at org.h2.engine.Database.open(Database.java:675)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at com.intellij.database.remote.jdbc.helpers.JdbcHelperImpl.connect(JdbcHelperImpl.java:603)
+	at com.intellij.database.remote.jdbc.impl.RemoteDriverImpl.connect(RemoteDriverImpl.java:38)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 41 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
+	... 35 more
+2020-05-14 06:01:37 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:481)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:402)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:3579)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:170)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:103)
+	at org.h2.engine.Database.getPageStore(Database.java:2659)
+	at org.h2.engine.Database.open(Database.java:675)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at com.intellij.database.remote.jdbc.helpers.JdbcHelperImpl.connect(JdbcHelperImpl.java:603)
+	at com.intellij.database.remote.jdbc.impl.RemoteDriverImpl.connect(RemoteDriverImpl.java:38)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 41 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
+	... 35 more
+2020-05-14 06:01:52 jdbc[3]: exception
+java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
+	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
+	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:466)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2020-05-14 06:01:54 jdbc[3]: exception
+java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
+	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
+	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:466)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2020-05-14 06:01:58 jdbc[3]: exception
+java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
+	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
+	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:466)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2020-05-14 06:02:15 jdbc[3]: exception
+java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
+	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
+	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:466)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2020-05-13 23:42:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column count does not match; SQL statement:
+INSERT INTO Messages VALUES (default, 'channelId0', 'memberId0', 'email0', 'firstName0', 'lastName0', 'role') [21002-199]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:451)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.command.dml.Insert.prepare(Insert.java:314)
+	at org.h2.command.Parser.prepareCommand(Parser.java:689)
+	at org.h2.engine.Session.prepareLocal(Session.java:627)
+	at org.h2.engine.Session.prepareCommand(Session.java:565)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1292)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:217)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:1113)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1436)
+	at org.h2.server.web.WebApp.query(WebApp.java:1111)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1073)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1060)
+	at org.h2.server.web.WebThread.process(WebThread.java:173)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+2020-05-13 23:43:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column count does not match; SQL statement:
+INSERT INTO Messages VALUES (default, 'channelId0', 'memberId0', 'email0', 'firstName0', 'lastName0', 'role') [21002-199]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:451)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.command.dml.Insert.prepare(Insert.java:314)
+	at org.h2.command.Parser.prepareCommand(Parser.java:689)
+	at org.h2.engine.Session.prepareLocal(Session.java:627)
+	at org.h2.engine.Session.prepareCommand(Session.java:565)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1292)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:217)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:1113)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1436)
+	at org.h2.server.web.WebApp.query(WebApp.java:1111)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1073)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1060)
+	at org.h2.server.web.WebThread.process(WebThread.java:173)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+2020-05-14 13:48:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "9999" not found; SQL statement:
+update MESSAGES set (messageid, datetime, timestamp)  = ("9999", "5555", "3434") [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:163)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:145)
+	at org.h2.command.dml.Update.prepare(Update.java:275)
+	at org.h2.command.Parser.prepareCommand(Parser.java:744)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:212)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1459)
+	at org.h2.server.web.WebApp.query(WebApp.java:1116)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1078)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1065)
+	at org.h2.server.web.WebThread.process(WebThread.java:178)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+2020-05-14 13:48:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "9999" not found; SQL statement:
+update MESSAGES set (messageid, datetime, timestamp)  = ("9999", "5555", "3434") where pkey = 33 [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:163)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:145)
+	at org.h2.command.dml.Update.prepare(Update.java:275)
+	at org.h2.command.Parser.prepareCommand(Parser.java:744)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:212)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1459)
+	at org.h2.server.web.WebApp.query(WebApp.java:1116)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1078)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1065)
+	at org.h2.server.web.WebThread.process(WebThread.java:178)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+2020-05-14 13:50:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "DATATIME" not found; SQL statement:
+update MESSAGES set messageid="3333", datatime="2222", timestamp="99" where messageid=33 [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.table.Table.getColumn(Table.java:703)
+	at org.h2.command.Parser.readTableColumn(Parser.java:1274)
+	at org.h2.command.Parser.parseUpdateSetClause(Parser.java:1325)
+	at org.h2.command.Parser.parseUpdate(Parser.java:1290)
+	at org.h2.command.Parser.parsePrepared(Parser.java:1005)
+	at org.h2.command.Parser.parse(Parser.java:843)
+	at org.h2.command.Parser.parse(Parser.java:815)
+	at org.h2.command.Parser.prepareCommand(Parser.java:738)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:212)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1459)
+	at org.h2.server.web.WebApp.query(WebApp.java:1116)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1078)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1065)
+	at org.h2.server.web.WebThread.process(WebThread.java:178)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+2020-05-14 13:51:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "DATATIME" not found; SQL statement:
+update MESSAGES set messageid='3333', datatime='2222', timestamp='99' where pkey=33 [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.table.Table.getColumn(Table.java:703)
+	at org.h2.command.Parser.readTableColumn(Parser.java:1274)
+	at org.h2.command.Parser.parseUpdateSetClause(Parser.java:1325)
+	at org.h2.command.Parser.parseUpdate(Parser.java:1290)
+	at org.h2.command.Parser.parsePrepared(Parser.java:1005)
+	at org.h2.command.Parser.parse(Parser.java:843)
+	at org.h2.command.Parser.parse(Parser.java:815)
+	at org.h2.command.Parser.prepareCommand(Parser.java:738)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:212)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1459)
+	at org.h2.server.web.WebApp.query(WebApp.java:1116)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1078)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1065)
+	at org.h2.server.web.WebThread.process(WebThread.java:178)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+2020-05-14 14:04:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "update Messages set messageId=0111,dateTime=5111,message=I[*]'m Updated,timeStamp=123 where pKey = 40"; SQL statement:
+update Messages set messageId=0111,dateTime=5111,message=I'm Updated,timeStamp=123 where pKey = 40 [42000-200]
+2020-05-14 15:04:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET MESSAGE = I LOVE[*] DALIAN WHERE MESSAGEID = 3333"; SQL statement:
+update Messages set message = I love Dalian where messageId = 3333 [42000-200]
+2020-05-14 16:51:17 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:481)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:402)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:3579)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:170)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:103)
+	at org.h2.engine.Database.getPageStore(Database.java:2659)
+	at org.h2.engine.Database.open(Database.java:675)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:677)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:228)
+	at database.DbHelper.<init>(DbHelper.java:25)
+	at database.DbHelper.getConnection(DbHelper.java:22)
+	at database.DbTest.main(DbTest.java:13)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 27 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
+	... 21 more
+2020-05-14 18:12:15 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:481)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:402)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:3579)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:170)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:103)
+	at org.h2.engine.Database.getPageStore(Database.java:2659)
+	at org.h2.engine.Database.open(Database.java:675)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:677)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:228)
+	at database.DbHelper.<init>(DbHelper.java:25)
+	at database.DbHelper.getConnection(DbHelper.java:22)
+	at database.DbTest.main(DbTest.java:13)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 27 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
+	... 21 more
+2020-05-14 18:12:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "yilin"; SQL statement:
+select * from Messages where dateTime = 5011 [22018-200]
+2020-05-14 18:14:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "yilin"; SQL statement:
+select * from Messages where dateTime = 5011 [22018-200]
+2020-05-14 19:15:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "CHANNELID" not found; SQL statement:
+insert into Messages( pKey,messageId,sender,dateTime,message,timeStamp,channelId) values ( default, ?,?,?,?,?,?) [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.table.Table.getColumn(Table.java:703)
+	at org.h2.command.Parser.parseColumn(Parser.java:1450)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1435)
+	at org.h2.command.Parser.parseInsertGivenTable(Parser.java:1804)
+	at org.h2.command.Parser.parseInsert(Parser.java:1749)
+	at org.h2.command.Parser.parsePrepared(Parser.java:954)
+	at org.h2.command.Parser.parse(Parser.java:843)
+	at org.h2.command.Parser.parse(Parser.java:815)
+	at org.h2.command.Parser.prepareCommand(Parser.java:738)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:76)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:352)
+	at database.DbHelper.generateSQL(DbHelper.java:218)
+	at database.DbHelper.write(DbHelper.java:48)
+	at database.DbTest.main(DbTest.java:16)
+2020-05-14 20:06:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "2c4f1151-6a3c-48a5-9755-ab7c46533864" [22018-200]
+2020-05-14 20:06:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "bdfa7902-37e6-4cb6-b6be-6aff265ebf05" [22018-200]
+2020-05-14 20:06:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "327544d2-f8d5-4d27-9a76-6f596091ac03" [22018-200]
+2020-05-14 20:06:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "7e0484cb-a244-4c18-80d0-5e9caddf4dd6" [22018-200]
+2020-05-14 20:06:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "ec397021-ed86-4114-ad56-60d033232bb2" [22018-200]
+2020-05-14 20:06:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "dcf7e8d7-58b2-4a49-a8cc-55789e74a881" [22018-200]
+2020-05-14 20:06:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "8e324edf-6cc8-4400-93bd-c9dc32db8d6a" [22018-200]
+2020-05-14 20:06:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "3fce5478-5397-456c-9b69-88ab739a513e" [22018-200]
+2020-05-14 20:06:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "ef84c23d-ba5c-4522-9a31-3fc4042cabf5" [22018-200]
+2020-05-14 20:07:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: The database is open in exclusive mode; can not open additional connections [90135-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.engine.Session.checkSuspended(Session.java:1369)
+	at org.h2.engine.Session.transitionToState(Session.java:1361)
+	at org.h2.engine.Session.setCurrentCommand(Session.java:1343)
+	at org.h2.engine.Session.endStatement(Session.java:1887)
+	at org.h2.command.Command.executeUpdate(Command.java:285)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:191)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:152)
+	at database.DbHelper.generateSQL(DbHelper.java:223)
+	at database.DbHelper.write(DbHelper.java:48)
+	at database.DbHelper.update(DbHelper.java:147)
+	at Components.ChatMessages.listUserChatMessageAll(ChatMessages.java:101)
+	at Components.ChatMessages.sendChatMessage(ChatMessages.java:127)
+	at Components.ZoomAPI.sendMessage(ZoomAPI.java:62)
+	at Bots.botm5.main(botm5.java:24)
+2020-05-14 20:07:04 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:481)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:402)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:3579)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:170)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:103)
+	at org.h2.engine.Database.getPageStore(Database.java:2659)
+	at org.h2.engine.Database.open(Database.java:675)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:677)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:228)
+	at database.DbHelper.<init>(DbHelper.java:25)
+	at database.DbHelper.getConnection(DbHelper.java:22)
+	at Components.ChatMessages.listUserChatMessageAll(ChatMessages.java:100)
+	at Components.ChatMessages.sendChatMessage(ChatMessages.java:127)
+	at Components.ZoomAPI.sendMessage(ZoomAPI.java:62)
+	at Bots.botm5.main(botm5.java:24)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 30 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.FileStore.open(FileStore.java:166)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
+	... 24 more
+Caused by: java.nio.channels.OverlappingFileLockException
+	at java.base/sun.nio.ch.FileLockTable.checkList(FileLockTable.java:229)
+	at java.base/sun.nio.ch.FileLockTable.add(FileLockTable.java:123)
+	at java.base/sun.nio.ch.FileChannelImpl.tryLock(FileChannelImpl.java:1154)
+	at org.h2.store.fs.FileNio.tryLock(FilePathNio.java:121)
+	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
+	at org.h2.mvstore.FileStore.open(FileStore.java:163)
+	... 25 more
+2020-05-14 20:07:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "2c4f1151-6a3c-48a5-9755-ab7c46533864" [22018-200]
+2020-05-14 20:07:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "bdfa7902-37e6-4cb6-b6be-6aff265ebf05" [22018-200]
+2020-05-14 20:07:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "327544d2-f8d5-4d27-9a76-6f596091ac03" [22018-200]
+2020-05-14 20:07:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "7e0484cb-a244-4c18-80d0-5e9caddf4dd6" [22018-200]
+2020-05-14 20:07:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "ec397021-ed86-4114-ad56-60d033232bb2" [22018-200]
+2020-05-14 20:07:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "dcf7e8d7-58b2-4a49-a8cc-55789e74a881" [22018-200]
+2020-05-14 20:07:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "8e324edf-6cc8-4400-93bd-c9dc32db8d6a" [22018-200]
+2020-05-14 20:07:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "3fce5478-5397-456c-9b69-88ab739a513e" [22018-200]
+2020-05-14 20:07:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "ef84c23d-ba5c-4522-9a31-3fc4042cabf5" [22018-200]
+2020-05-14 20:07:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "184be3e5-303c-43e1-887f-72dc0a11473f" [22018-200]
+2020-05-14 20:07:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "2c4f1151-6a3c-48a5-9755-ab7c46533864" [22018-200]
+2020-05-14 20:07:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "bdfa7902-37e6-4cb6-b6be-6aff265ebf05" [22018-200]
+2020-05-14 20:07:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "327544d2-f8d5-4d27-9a76-6f596091ac03" [22018-200]
+2020-05-14 20:07:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "7e0484cb-a244-4c18-80d0-5e9caddf4dd6" [22018-200]
+2020-05-14 20:07:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "ec397021-ed86-4114-ad56-60d033232bb2" [22018-200]
+2020-05-14 20:07:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "dcf7e8d7-58b2-4a49-a8cc-55789e74a881" [22018-200]
+2020-05-14 20:07:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "8e324edf-6cc8-4400-93bd-c9dc32db8d6a" [22018-200]
+2020-05-14 20:07:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "3fce5478-5397-456c-9b69-88ab739a513e" [22018-200]
+2020-05-14 20:07:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "ab1f426e-cd13-4fee-97b4-7053dd95b92f" [22018-200]
+2020-05-14 20:07:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "184be3e5-303c-43e1-887f-72dc0a11473f" [22018-200]
+2020-05-14 20:07:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "2c4f1151-6a3c-48a5-9755-ab7c46533864" [22018-200]
+2020-05-14 20:07:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "bdfa7902-37e6-4cb6-b6be-6aff265ebf05" [22018-200]
+2020-05-14 20:07:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "327544d2-f8d5-4d27-9a76-6f596091ac03" [22018-200]
+2020-05-14 20:07:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "7e0484cb-a244-4c18-80d0-5e9caddf4dd6" [22018-200]
+2020-05-14 20:07:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "ec397021-ed86-4114-ad56-60d033232bb2" [22018-200]
+2020-05-14 20:07:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "dcf7e8d7-58b2-4a49-a8cc-55789e74a881" [22018-200]
+2020-05-14 20:07:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "8e324edf-6cc8-4400-93bd-c9dc32db8d6a" [22018-200]
+2020-05-14 20:07:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "3fce5478-5397-456c-9b69-88ab739a513e" [22018-200]
+2020-05-14 20:07:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "ef84c23d-ba5c-4522-9a31-3fc4042cabf5" [22018-200]
+2020-05-14 20:09:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = AB1F426E-CD13-4FEE[*]-97B4-7053DD95B92F"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = ab1f426e-cd13-4fee-97b4-7053dd95b92f [42000-200]
+2020-05-14 20:10:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 184BE3E5[*]-303C-43E1-887F-72DC0A11473F"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 184be3e5-303c-43e1-887f-72dc0a11473f [42000-200]
+2020-05-14 20:10:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 2C4F1151[*]-6A3C-48A5-9755-AB7C46533864"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 2c4f1151-6a3c-48a5-9755-ab7c46533864 [42000-200]
+2020-05-14 20:10:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = BDFA7902-37E6-4CB6[*]-B6BE-6AFF265EBF05"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = bdfa7902-37e6-4cb6-b6be-6aff265ebf05 [42000-200]
+2020-05-14 20:10:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 327544D2[*]-F8D5-4D27-9A76-6F596091AC03"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 327544d2-f8d5-4d27-9a76-6f596091ac03 [42000-200]
+2020-05-14 20:10:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 7E0484CB[*]-A244-4C18-80D0-5E9CADDF4DD6"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 7e0484cb-a244-4c18-80d0-5e9caddf4dd6 [42000-200]
+2020-05-14 20:10:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = EC397021-ED86-4114-AD56-60D033232BB2[*]"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = ec397021-ed86-4114-ad56-60d033232bb2 [42000-200]
+2020-05-14 20:10:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = DCF7E8D7-58B2[*]-4A49-A8CC-55789E74A881"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = dcf7e8d7-58b2-4a49-a8cc-55789e74a881 [42000-200]
+2020-05-14 20:10:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 8E324EDF[*]-6CC8-4400-93BD-C9DC32DB8D6A"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 8e324edf-6cc8-4400-93bd-c9dc32db8d6a [42000-200]
+2020-05-14 20:10:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 3FCE5478[*]-5397-456C-9B69-88AB739A513E"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 3fce5478-5397-456c-9b69-88ab739a513e [42000-200]
+2020-05-14 20:10:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = EF84C23D-BA5C-4522-9A31[*]-3FC4042CABF5"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = ef84c23d-ba5c-4522-9a31-3fc4042cabf5 [42000-200]
+2020-05-14 20:10:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = AB1F426E-CD13-4FEE[*]-97B4-7053DD95B92F"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = ab1f426e-cd13-4fee-97b4-7053dd95b92f [42000-200]
+2020-05-14 20:10:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 184BE3E5[*]-303C-43E1-887F-72DC0A11473F"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 184be3e5-303c-43e1-887f-72dc0a11473f [42000-200]
+2020-05-14 20:10:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 2C4F1151[*]-6A3C-48A5-9755-AB7C46533864"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 2c4f1151-6a3c-48a5-9755-ab7c46533864 [42000-200]
+2020-05-14 20:10:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = BDFA7902-37E6-4CB6[*]-B6BE-6AFF265EBF05"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = bdfa7902-37e6-4cb6-b6be-6aff265ebf05 [42000-200]
+2020-05-14 20:10:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 327544D2[*]-F8D5-4D27-9A76-6F596091AC03"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 327544d2-f8d5-4d27-9a76-6f596091ac03 [42000-200]
+2020-05-14 20:10:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 7E0484CB[*]-A244-4C18-80D0-5E9CADDF4DD6"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 7e0484cb-a244-4c18-80d0-5e9caddf4dd6 [42000-200]
+2020-05-14 20:10:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = EC397021-ED86-4114-AD56-60D033232BB2[*]"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = ec397021-ed86-4114-ad56-60d033232bb2 [42000-200]
+2020-05-14 20:10:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = DCF7E8D7-58B2[*]-4A49-A8CC-55789E74A881"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = dcf7e8d7-58b2-4a49-a8cc-55789e74a881 [42000-200]
+2020-05-14 20:10:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 8E324EDF[*]-6CC8-4400-93BD-C9DC32DB8D6A"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 8e324edf-6cc8-4400-93bd-c9dc32db8d6a [42000-200]
+2020-05-14 20:10:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 3743FEB0[*]-DC2F-4E38-B81F-A47D8B3F38A4"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 3743feb0-dc2f-4e38-b81f-a47d8b3f38a4 [42000-200]
+2020-05-14 20:10:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = AB1F426E-CD13-4FEE[*]-97B4-7053DD95B92F"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = ab1f426e-cd13-4fee-97b4-7053dd95b92f [42000-200]
+2020-05-14 20:10:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 184BE3E5[*]-303C-43E1-887F-72DC0A11473F"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 184be3e5-303c-43e1-887f-72dc0a11473f [42000-200]
+2020-05-14 20:10:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 2C4F1151[*]-6A3C-48A5-9755-AB7C46533864"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 2c4f1151-6a3c-48a5-9755-ab7c46533864 [42000-200]
+2020-05-14 20:10:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = BDFA7902-37E6-4CB6[*]-B6BE-6AFF265EBF05"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = bdfa7902-37e6-4cb6-b6be-6aff265ebf05 [42000-200]
+2020-05-14 20:10:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 327544D2[*]-F8D5-4D27-9A76-6F596091AC03"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 327544d2-f8d5-4d27-9a76-6f596091ac03 [42000-200]
+2020-05-14 20:10:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 7E0484CB[*]-A244-4C18-80D0-5E9CADDF4DD6"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 7e0484cb-a244-4c18-80d0-5e9caddf4dd6 [42000-200]
+2020-05-14 20:10:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = EC397021-ED86-4114-AD56-60D033232BB2[*]"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = ec397021-ed86-4114-ad56-60d033232bb2 [42000-200]
+2020-05-14 20:10:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = DCF7E8D7-58B2[*]-4A49-A8CC-55789E74A881"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = dcf7e8d7-58b2-4a49-a8cc-55789e74a881 [42000-200]
+2020-05-14 20:10:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 8E324EDF[*]-6CC8-4400-93BD-C9DC32DB8D6A"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 8e324edf-6cc8-4400-93bd-c9dc32db8d6a [42000-200]
+2020-05-14 20:10:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = 3FCE5478[*]-5397-456C-9B69-88AB739A513E"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = 3fce5478-5397-456c-9b69-88ab739a513e [42000-200]
+2020-05-14 20:10:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE MESSAGES SET SENDER = ?,DATETIME = ?,MESSAGE = ?,TIMESTAMP = ?,CHANNELID = ? WHERE MESSAGEID = EF84C23D-BA5C-4522-9A31[*]-3FC4042CABF5"; SQL statement:
+update Messages set sender = ?,dateTime = ?,message = ?,timeStamp = ?,channelId = ? where messageId = ef84c23d-ba5c-4522-9a31-3fc4042cabf5 [42000-200]
+2020-05-14 20:39:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "MESSAGE VARCHAR(50)": "'This is an updated message sent in 2020-05-14 20:39:34' (54)"; SQL statement:
+update Messages set message = 'This is an updated message sent in 2020-05-14 20:39:34' where messageId = '2d4a7ed4-a686-4cfa-bec5-ac19805a3959' [22001-200]
+2020-05-14 22:25:14 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:481)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:402)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:3579)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:170)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:103)
+	at org.h2.engine.Database.getPageStore(Database.java:2659)
+	at org.h2.engine.Database.open(Database.java:675)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:677)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:228)
+	at database.DbHelper.<init>(DbHelper.java:25)
+	at database.DbHelper.getConnection(DbHelper.java:22)
+	at Utils.OauthClient.valid(OauthClient.java:92)
+	at Utils.OauthClient.authorize(OauthClient.java:55)
+	at Bots.botm5.main(botm5.java:21)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 29 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
+	... 23 more
+2020-05-15 02:32:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM MESSAGES WHERE SENDER = 'tjuwangyilin@163.com',[*] TIMESTAMP=374551770 "; SQL statement:
+SELECT * FROM MESSAGES where sender = 'tjuwangyilin@163.com', timestamp=374551770 [42000-199]
+2020-05-15 11:54:10 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:481)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:402)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:3579)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:170)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:103)
+	at org.h2.engine.Database.getPageStore(Database.java:2659)
+	at org.h2.engine.Database.open(Database.java:675)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:309)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:289)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:785)
+	at org.h2.server.web.WebApp.login(WebApp.java:1008)
+	at org.h2.server.web.WebApp.process(WebApp.java:223)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:173)
+	at org.h2.server.web.WebThread.process(WebThread.java:139)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 31 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
+	... 25 more
+2020-05-15 12:01:08 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:481)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:402)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:3579)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:170)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:103)
+	at org.h2.engine.Database.getPageStore(Database.java:2659)
+	at org.h2.engine.Database.open(Database.java:675)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:677)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:228)
+	at database.DbHelper.<init>(DbHelper.java:25)
+	at database.DbHelper.getConnection(DbHelper.java:21)
+	at Utils.OauthClient.inValid(OauthClient.java:97)
+	at Utils.OauthClient.authorize(OauthClient.java:56)
+	at Bots.botm5.main(botm5.java:21)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 29 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
+	... 23 more
+2020-05-15 12:05:29 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:481)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:402)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:3579)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:170)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:103)
+	at org.h2.engine.Database.getPageStore(Database.java:2659)
+	at org.h2.engine.Database.open(Database.java:675)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:677)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:228)
+	at database.DbHelper.<init>(DbHelper.java:25)
+	at database.DbHelper.getConnection(DbHelper.java:21)
+	at Utils.OauthClient.inValid(OauthClient.java:97)
+	at Utils.OauthClient.authorize(OauthClient.java:56)
+	at Bots.botm5.main(botm5.java:21)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 29 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
+	... 23 more
+2020-05-15 12:22:26 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:481)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:402)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:3579)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:170)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:103)
+	at org.h2.engine.Database.getPageStore(Database.java:2659)
+	at org.h2.engine.Database.open(Database.java:675)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:677)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:228)
+	at database.DbHelper.<init>(DbHelper.java:25)
+	at database.DbHelper.getConnection(DbHelper.java:21)
+	at Utils.OauthClient.inValid(OauthClient.java:97)
+	at Utils.OauthClient.authorize(OauthClient.java:56)
+	at Bots.botm5.main(botm5.java:21)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 29 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/dlwan/Documents/Study/2020SQ/SWE262P/ZoomAPI-Java/src/db/zoom.mv.db [1.4.200/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
+	... 23 more
+2020-05-15 12:27:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE CHANNELSMEMBERSHIP SET MEMBERID = ?,EMAIL = ?,FIRSTNAME = ?,LASTNAME = ?,ROLE = ? WHERE CHANNELID = 'f0583de6-4a8f-4bbb-ac2b-fc62385f833a' AND MEMBERID 'nm7vl_-ntcwn5gojcssl8a'[*]"; SQL statement:
+update ChannelsMembership set memberId = ?,email = ?,firstName = ?,lastName = ?,role = ? where channelId = 'f0583de6-4a8f-4bbb-ac2b-fc62385f833a' and memberId 'nm7vl_-ntcwn5gojcssl8a' [42000-200]
+2020-05-15 12:27:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE CHANNELSMEMBERSHIP SET MEMBERID = ?,EMAIL = ?,FIRSTNAME = ?,LASTNAME = ?,ROLE = ? WHERE CHANNELID = 'f0583de6-4a8f-4bbb-ac2b-fc62385f833a' AND MEMBERID 's4fjawkhrtcwcpvxbhxtqw'[*]"; SQL statement:
+update ChannelsMembership set memberId = ?,email = ?,firstName = ?,lastName = ?,role = ? where channelId = 'f0583de6-4a8f-4bbb-ac2b-fc62385f833a' and memberId 's4fjawkhrtcwcpvxbhxtqw' [42000-200]
+2020-05-15 12:27:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE CHANNELSMEMBERSHIP SET MEMBERID = ?,EMAIL = ?,FIRSTNAME = ?,LASTNAME = ?,ROLE = ? WHERE CHANNELID = 'f0583de6-4a8f-4bbb-ac2b-fc62385f833a' AND MEMBERID 'wavxiso-stamdary28fqma'[*]"; SQL statement:
+update ChannelsMembership set memberId = ?,email = ?,firstName = ?,lastName = ?,role = ? where channelId = 'f0583de6-4a8f-4bbb-ac2b-fc62385f833a' and memberId 'wavxiso-stamdary28fqma' [42000-200]

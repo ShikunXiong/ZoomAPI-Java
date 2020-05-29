@@ -26,13 +26,13 @@ public class botm5 {
 //        String s2 = zoomAPI.getChatChannels().deleteChannel("d9ffb162-47e1-438c-b473-bdf31b36a2b1");
 //         String s3 = zoomAPI.getChatChannels().listChannelMembers("f0583de6-4a8f-4bbb-ac2b-fc62385f833a");
 //        int i = 0;
-//        System.out.println(zoomAPI.listChatHistory("test"));
-//        String newMessage = "This is a new message sent in " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-//        Map<String, String> bodyMap2 = new HashMap<>();
-//        bodyMap2.put("message", newMessage);
-//        bodyMap2.put("to_channel", "c1e85cd0e22844baaaa9cb2bf55f7704");
-//        zoomAPI.getChatMessages().sendChatMessage(bodyMap2);
-//        System.out.println(zoomAPI.listChatHistory("test"));
+        System.out.println(zoomAPI.listChatHistory("test"));
+        String newMessage = "This is a new message sent in " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        Map<String, String> bodyMap2 = new HashMap<>();
+        bodyMap2.put("message", newMessage);
+        bodyMap2.put("to_channel", "c1e85cd0e22844baaaa9cb2bf55f7704");
+        zoomAPI.getChatMessages().sendChatMessage(bodyMap2);
+        System.out.println(zoomAPI.listChatHistory("test"));
 //        zoomAPI.getChatChannels().inviteMembers()
         // Update a message
 //        String messageId = "8fcc447c-e0d0-4e0a-bbe0-bf2f0b2bfe4b";
