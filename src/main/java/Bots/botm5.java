@@ -30,9 +30,9 @@ public class botm5 {
         String newMessage = "This is a new message sent in " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         Map<String, String> bodyMap2 = new HashMap<>();
         bodyMap2.put("message", newMessage);
-        bodyMap2.put("to_channel", "c1e85cd0e22844baaaa9cb2bf55f7704");
+        bodyMap2.put("to_channel", "e00a1405fc5a4dc0980fa3c6dfed5989");
         zoomAPI.getChatMessages().sendChatMessage(bodyMap2);
-        System.out.println(zoomAPI.listChatHistory("test"));
+        System.out.println(zoomAPI.listChatHistory("mytest"));
 //        zoomAPI.getChatChannels().inviteMembers()
         // Update a message
 //        String messageId = "8fcc447c-e0d0-4e0a-bbe0-bf2f0b2bfe4b";

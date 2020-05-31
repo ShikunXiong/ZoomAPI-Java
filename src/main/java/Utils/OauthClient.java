@@ -48,8 +48,8 @@ public class OauthClient implements Auth {
         props.load(new java.io.FileInputStream("src/settings.properties"));
         final String TOKEN_SERVER_URL =props.getProperty("authorize_url") ;
         final String AUTHORIZATION_SERVER_URL = props.getProperty("token_url");
-        final String client_id = props.getProperty("client_id");
-        final String client_secret = props.getProperty("client_secret");
+        final String client_id = props.getProperty("yl_client_id");
+        final String client_secret = props.getProperty("yl_client_secret");
         final String redirect_url = props.getProperty("redirect_url");
         final int port = Integer.parseInt(props.getProperty("port"));
 
